@@ -281,19 +281,14 @@ function printAction(property,id,action,actionid){
 
 /* Generate Tree GUI for the current node and all children, including links */
 function treeGuiOf(node, nodeAddress){
-	if(Array.isArray(node)){
-		let ol = document.createElement("ol");
-		ol.id = nodeAddress;
-		for(i = 0; i < node.length; i++){
-			//(skip label, as array)
-			let li = document.createElement("li");
-			li.appendChild(treeGuiOf(node[i], nodeAddress + "/" + i));
-			ol.appendChild(li);
-		}
-		return ol;
-	} else if(typeof node == "object"){
+	if(typeof node == "object"){
+		let array = Array.isArray(node);
+
 		let ul = document.createElement("ul");
 		ul.id = nodeAddress;
+		if(array){
+			ul.classList.add("array");
+		}
 		for(key in node){
 			if(key[0] == '_'){ continue; }
 			let li = document.createElement("li");
@@ -309,7 +304,11 @@ function treeGuiOf(node, nodeAddress){
 			
 			//Show space between key and value
 			let span = document.createElement("span");
-			span.textContent = ": ";
+			if(array){
+				span.textContent = ". ";
+			} else {
+				span.textContent = ": ";
+			}
 			li.appendChild(span);
 
 			li.appendChild(treeGuiOf(node[key], nodeAddress + "/" + key));
@@ -323,7 +322,7 @@ function treeGuiOf(node, nodeAddress){
 		link.id = nodeAddress;
 		link.href = urlWithoutParameters + "?view=" + absNode;
 		link.textContent = node;
-		link.addEventListener("click", view(absNode));
+		link.addEventListener("click", function(){ view(absNode); });
 		return link;
 	} else {
 		let span = document.createElement("span");
