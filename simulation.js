@@ -8,74 +8,54 @@ var nextClick = {};
 
 var currentActions = {};
 
-function isNavigatableProperty(path)
-{
-	if(path==undefined)
-		return false;
-	if(Number.isFinite(path))
-		return false;
-	if (typeof path === "boolean"){
-		return false;
-	}
-	if(Array.isArray(path))
-	{
-		return false;
-	}
-	if(typeof path != "string")
-	{
-		return false;
-	}
-	if(!path.includes("/"))
-	{
-		return false;
-	}
-	else
-	{
-		let v = getProperty(path);
-		if(typeof v == "object")
-		{
-			return true;
-		}
-		v = getProperty(path);
-		return false;
-	}
-}
-
-function getProperty(path)
-{
-	if(path==undefined)
-		return undefined;
-
-	if(!(typeof path == "string"))
-	{
-		let test = true;
-	}
-	let reference = false;
-	if(path.startsWith("&"))
-	{
-		path = path.substring(1);
-		return path;
-	}
-	var parts = path.split("/");
-	let parent = data[parts[0]];
-	for(var i=1;i<parts.length;i++)
-	{
-		if(parent==undefined)
-		{
-			let test = true;
+/*
+ * Follows the path, starting at 'node', returning whatever is found at the end.
+ * 
+ *
+ * */
+function getProperty(node, path, validatePath = true){
+	if(validatePath){
+		if(!couldBePath(path)){
 			return undefined;
 		}
-		if(Array.isArray(parent))
-		{
-			parent = parent[parseFloat(parts[i])];
+	}
+	//(from here on, assume valid)
+	//Remove @/ (as we know we have to start at data)
+	path = path.substring(1);
+	path = path.split('/');
+	
+	//If first stage of path is empty, i.e. '/foo/bar',
+	//start at root (data) 
+	if(path[0] == ""){
+		node = data;
+		path = path.slice(1, path.length);
+	}
+
+	//try to traverse hierarchy
+	for(let i = 0; i < path.length; i++){
+		if(!(typeof node == "object")){
+			return undefined;
 		}
-		else
-		{
-			parent = parent[parts[i]];
+		let child = path[i];
+		if(child == ".."){
+			//Not ideal, as will only work for objects and arrays.
+			//Can't get parent of primitives, but shouldn't need to for
+			//our purposes.
+			node = getProperty(node, node._parent);
+		} else if(child in node){
+			node = node[child];
+		} else {
+			return undefined;
+		}
+
+		//Try to resolve a suspected address
+		if(couldBePath(node)){
+			node = getProperty(node, node);
 		}
 	}
-	return parent;
+	return node;
 }
+
 
 function getRelativePropertyFromContext(parent,path,keywordsToRelativeID)
 {
@@ -244,73 +224,6 @@ function getPropertyIdFromContext(parent,path,keywordsToRelativeID,id)
 	{
 		return id;
 	}
-}
-
-function evaluateExpression(quantity,params)
-{
-	if(typeof quantity == "string")
-	{
-		if(typeof quantity=="number")
-		{
-			return quantity;
-		}
-		if(isNumericString(quantity))
-		{
-			return parseFloat(quantity);
-		}
-		let id = getPropertyIdFromContext(data,quantity,params,undefined);
-		//If the property comes from a text input then it isn't a property
-		if(typeof id=="number")
-		{
-			return id;
-		}
-		if(isNumericString(id))
-		{
-			return parseFloat(id);
-		}
-		let p = getProperty(id);
-		if(typeof p=="number")
-		{
-			return p;
-		}
-		//Don't think this should ever happen
-		return parseFloat(p);
-	}
-	else
-		if(Number.isFinite(quantity))
-		{
-			return quantity;
-		}
-	else
-		if("multiply" in quantity)
-		{
-			let total = 1.0;
-			for(elemInd in quantity.multiply)
-			{
-				let elem = quantity.multiply[elemInd];
-				total *= evaluateExpression(elem,params);
-			}
-			return total;
-		}
-	else
-		if("customFunction" in quantity)
-		{
-			return quantity.customFunction(data,quantity,params);
-		}
-}
-
-//Create a unique id for a new object
-function newID(inObject)
-{
-	let id = "id"+frame;
-	for(let existing in inObject)
-	{
-		if(existing==id)
-		{
-			id = id+"i";
-		}
-	}
-	return id;
 }
 
 //Some logic that restricts whether actions can be performed
@@ -779,10 +692,19 @@ function end(fps, panic)
 	}
 }
 
+//TODO reenable MainLoop
 // Start the main loop.
-MainLoop.setUpdate(update).setDraw(draw).setEnd(end).start();
-
+/* MainLoop.setUpdate(update).setDraw(draw).setEnd(end).start();
 if(urlObjectID!=undefined)
 {
 	view(urlObjectID,true);
-}
+} */
+
+generateParentRefsInChildren(data, "@");
+
+// console.log(data.Test.foo._parent);
+let y = getProperty(data, "@/Test/bar/y");
+let x = getProperty(y, "@../x");
+console.log(x);
+
+

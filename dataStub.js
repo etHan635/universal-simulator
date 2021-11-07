@@ -6,7 +6,17 @@ var data={
 };
 
 data["Test"] = {
-	battery:{
+	foo:{
+		name:"foo",
+		x:10,
+		bar:"@/Test/bar",
+	},
+	bar:{
+		name:"bar",
+		x:15,
+		y:['a','b','c'],
+	}
+	/* battery:{
 		name:"9V Battery",
 		voltage:9,
 		connectionPoints:{
@@ -35,6 +45,6 @@ data["Test"] = {
 			point1:"",
 			point2:""
 		}
-	}
+	} */
 
 }
