@@ -10,6 +10,7 @@ data["Test"] = {
 		name:"foo",
 		x:10,
 		bar:"@/Test/bar",
+		barAbs:"@../../bar",
 	},
 	bar:{
 		name:"bar",

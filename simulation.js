@@ -56,176 +56,6 @@ function getProperty(node, path, validatePath = true){
 	return node;
 }
 
-
-function getRelativePropertyFromContext(parent,path,keywordsToRelativeID)
-{
-	if(typeof path != "string")
-	{
-		return path;
-	}
-	if(path.startsWith("&"))
-	{
-		path = path.substring(1);
-		return path;
-	}
-	let parts = path.split("/");
-	for(var i=0;i<parts.length;i++)
-	{
-		if(parent==undefined)
-		{
-			let test = true;
-		}
-		//We have reached a string reference to another object
-		if(typeof parent == "string")
-		{
-			parent = getRelativePropertyFromContext(data,parent,keywordsToRelativeID);
-		}
-		if(parts[i] in keywordsToRelativeID)
-		{
-			parent = getRelativePropertyFromContext(parent,keywordsToRelativeID[parts[i]],keywordsToRelativeID)
-		}
-		else
-		{
-			if(Array.isArray(parent))
-			{
-				parent = parent[parseFloat(parts[i])];
-			}
-			else
-			{
-				parent = parent[parts[i]];
-			}
-		}
-	}
-	return parent;
-}
-
-function getParentAndChildId(path)
-{
-	let id = undefined;
-	if(path==undefined)
-	{
-		let test = true;
-	}
-	let parts = path.split("/");
-	for(var i=0;i<(parts.length-1);i++)
-	{
-		if(id==undefined)
-		{
-			id = parts[i];
-		}
-		else
-		{
-			id = id+"/"+parts[i];
-		}
-	}
-	return {"parent":id,"child":parts[(parts.length-1)]};
-}
-
-function getPropertyIdFromContext(parent,path,keywordsToRelativeID,id)
-{
-	if((path!=undefined)&&(path.length==0))
-	{
-		return id;
-	}
-	if(path==undefined)
-	{
-		let test = true;
-	}
-	if(typeof path != "string")
-	{
-		let test = true;
-	}
-	let resolve = false;
-	let reference = false;
-	if(path.startsWith("*"))
-	{
-		resolve = true;
-		path = path.substring(1);
-	}
-	if(path.startsWith("&"))
-	{
-		resolve = false;
-		reference = true;
-		path = path.substring(1);
-	}
-	let parts = path.split("/");
-	for(var i=0;i<parts.length;i++)
-	{
-		if(parent==undefined)
-		{
-			let test = true;
-		}
-		//We have reached a string reference to another object
-		if(typeof parent == "string")
-		{
-			id = getPropertyIdFromContext(data,parent,keywordsToRelativeID);
-			if(i<(parts.length-1))
-			{
-				parent = getRelativePropertyFromContext(data,parent,keywordsToRelativeID);
-			}
-		}
-		if(parts[i] in keywordsToRelativeID)
-		{
-			let relativeID = keywordsToRelativeID[parts[i]];
-			if(typeof relativeID == "string")
-			{
-				id = getPropertyIdFromContext(parent,relativeID,keywordsToRelativeID,id);
-			}
-			else
-			{
-				id = relativeID;
-			}
-			if(i<(parts.length-1))
-			{
-				parent = getRelativePropertyFromContext(parent,keywordsToRelativeID[parts[i]],keywordsToRelativeID,id);
-			}
-		}
-		else
-			if(parts[i] == "..")
-			{
-				let ind = id.lastIndexOf("/");
-				id = id.substring(0,ind);
-				parent = getProperty(id);
-			}
-		else
-		{
-			if(id==undefined)
-			{
-				id = parts[i];
-			}
-			else
-			{
-				id = id+"/"+parts[i];
-			}
-			if(Array.isArray(parent))
-			{
-				parent = parent[parseFloat(parts[i])];
-			}
-			else
-			{
-				if(parent==undefined)
-				{
-					return undefined;
-				}
-				parent = parent[parts[i]];
-			}
-		}
-	}
-	if(resolve)
-	{
-		return getProperty(id);
-	}
-	else
-		if(reference)
-		{
-			return "&"+id;
-		}
-	else
-	{
-		return id;
-	}
-}
-
 //Some logic that restricts whether actions can be performed
 //or whether an option can be added to the list of actions that can be selected
 function validateCanAct(property,id,canActRule,params)
@@ -694,17 +524,12 @@ function end(fps, panic)
 
 //TODO reenable MainLoop
 // Start the main loop.
-/* MainLoop.setUpdate(update).setDraw(draw).setEnd(end).start();
+MainLoop.setUpdate(update).setDraw(draw).setEnd(end).start();
 if(urlObjectID!=undefined)
 {
 	view(urlObjectID,true);
-} */
+}
 
 generateParentRefsInChildren(data, "@");
 
-// console.log(data.Test.foo._parent);
-let y = getProperty(data, "@/Test/bar/y");
-let x = getProperty(y, "@../x");
-console.log(x);
-
-
+// console.log(data);

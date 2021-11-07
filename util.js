@@ -1,3 +1,6 @@
+/*
+ * Generates a '_parent' field in all children of the provided node.
+ * */
 function generateParentRefsInChildren(node, nodeAddress){
 	if(typeof node != "object"){
 		return;
@@ -38,6 +41,41 @@ function couldBePath(path){
 		}
 	}
 	return false;
+}
+
+/*
+ * Creates an absolute path by combining a relative path
+ * with that of the source.
+ * */
+function resolvePath(source, path){
+	if(!couldBePath(path)){
+		return undefined;
+	}
+	if(path[1] == '/'){//Absolute, so don't need to resolve.
+		return path;
+	}
+
+	//Relative, need to resolve
+	source = source.substring(1).split('/');
+	path = path.substring(1).split('/');
+	for(i = 0; i < path.length; i++){
+		if(path[i] == ".."){
+			source.pop();
+		} else {
+			source.push(path[i]);
+		}
+	}
+
+	//Reform path
+	absPath = "@";
+	for(i = 0; i < source.length; i++){
+		absPath += source[i];
+		if(i < source.length - 1){
+			absPath += "/";
+		}
+	}
+	// console.log("abs: " + absPath);
+	return absPath;
 }
 
 function isNumericString(str) {

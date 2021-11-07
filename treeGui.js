@@ -1,6 +1,7 @@
-var contentDiv = document.getElementById('content');
+var pathDiv = document.getElementById("path");
+var contentDiv = document.getElementById("content");
 
-//When an option is changed the selected options are altered
+/* //When an option is changed the selected options are altered
 function updateSelection(optionid,actionid,id){
 	let selectelem = document.getElementById(optionid);
 	selectedOption[optionid] = selectelem.value;
@@ -276,7 +277,62 @@ function printAction(property,id,action,actionid){
 	innerHTML += "\n</tr>";
 	innerHTML += "\n</table>";
 	return innerHTML;
+} */
+
+/* Generate Tree GUI for the current node and all children, including links */
+function treeGuiOf(node, nodeAddress){
+	if(Array.isArray(node)){
+		let ol = document.createElement("ol");
+		ol.id = nodeAddress;
+		for(i = 0; i < node.length; i++){
+			//(skip label, as array)
+			let li = document.createElement("li");
+			li.appendChild(treeGuiOf(node[i], nodeAddress + "/" + i));
+			ol.appendChild(li);
+		}
+		return ol;
+	} else if(typeof node == "object"){
+		let ul = document.createElement("ul");
+		ul.id = nodeAddress;
+		for(key in node){
+			if(key == "_parent"){ continue; }
+			let li = document.createElement("li");
+			
+			//Show title as click option
+			let link = document.createElement("a");
+			link.classList.add("key");
+			link.id = nodeAddress + "/" + key;
+			link.href = urlWithoutParameters + "?view=" + nodeAddress + "/" + key;
+			link.textContent = key;
+			link.addEventListener("click", view(nodeAddress));
+			li.appendChild(link);
+			
+			//Show space between key and value
+			let span = document.createElement("span");
+			span.textContent = ": ";
+			li.appendChild(span);
+
+			li.appendChild(treeGuiOf(node[key], nodeAddress + "/" + key));
+			ul.appendChild(li);
+		}
+		return ul;
+	} else if(couldBePath(node)){
+		let absNode = resolvePath(nodeAddress, node);
+
+		let link = document.createElement("a");
+		link.id = nodeAddress;
+		link.href = urlWithoutParameters + "?view=" + absNode;
+		link.textContent = node;
+		link.addEventListener("click", view(absNode));
+		return link;
+	} else {
+		let span = document.createElement("span");
+		span.id = nodeAddress;
+		span.innerHTML = node;
+		return span;
+	}
 }
+
 
 //Recursively print out the tree, with buttons to view any part of it
 function printProperties(property,id)
@@ -437,38 +493,38 @@ function printProperties(property,id)
 
 //Build the menu buttons and then recursively print out the properties
 function updateView(){
-	let innerHTML = "";
+	let path = "@";
+	let nodeName = "@";
+	let node = data;
+	//Build a URL display for the parents of the current node
+	pathDiv.textContent="";
+	
+	for(i = 1; i <= currentView.length; i++){
+		//Create link to current ancestor
+		let link = document.createElement("a");
+		link.href = urlWithoutParameters + "?view=" + path;
+		link.textContent = nodeName;
+		link.addEventListener("click", function(){ view(path); })
+		pathDiv.appendChild(link);
 
-	//Build a set of buttons for the parents of the current object (to view a higher level)
-	path = "";
-	parent = data;
+		//If not final node, add '/' and get the next node in the sequence
+		if(i < currentView.length){
+			let spacer = document.createElement("span");
+			spacer.textContent = " / ";
+			pathDiv.appendChild(spacer);
 
-	innerHTML += "\n<button id='"+path+"' onClick='view(\""+path+"\");'>"+parent.visualisation.shortname+"</button><span>/</span>";			
-	for(let i in currentView){
-		let id = currentView[i];
-		parent = parent[id];
-		if(i==0){
-			path += id;
-		} else {
-			path += "/"+id;
-		}
-		if(parent==undefined){
-			break;
-		}
-		if((typeof parent == "object")&&("visualisation" in parent)&&("shortname" in parent.visualisation)){
-			innerHTML += "\n<button id='"+path+"' onClick='view(\""+path+"\");'>"+parent.visualisation.shortname+"</button><span>/</span>";								
-		} else {
-			innerHTML += "\n<button id='"+path+"' onClick='view(\""+path+"\");'>"+id+"</button><span>/</span>";						
+			nodeName = currentView[i];
+			path += "/" + nodeName;
+			node = node[nodeName];
 		}
 	}
-	innerHTML += "<br><hr>"
 
 	if(path.length==0){
 		path = undefined;
 	}
-	//render the property that the currentView is focused on
-	innerHTML += printProperties(parent,path);
 
-	contentDiv.innerHTML = innerHTML;
+	//render the property that the currentView is focused on
+	contentDiv.textContent="";
+	contentDiv.appendChild(treeGuiOf(node, path));
 	currentViewNeedsUpdating = false;
 }

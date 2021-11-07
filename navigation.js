@@ -33,7 +33,7 @@ function view(objectID,dontBackup=false)
 	}
 	else
 	{
-		var parts = objectID.split("/");
+		var parts = objectID.substring(1).split("/");
 		currentView = parts;
 	}
 	selectedOption = {};
@@ -42,8 +42,8 @@ function view(objectID,dontBackup=false)
 	if(dontBackup==false)
 	{
 		let urlPath = urlWithoutParameters+"?view="+objectID;
-		window.history.pushState({"title":""+currentViewId},"", urlPath);
-		previousViews.push(currentViewId);
+		// window.history.pushState({"title":""+currentViewId},"", urlPath);
+		// previousViews.push(currentViewId);
 	}
 	currentViewId = objectID;
 }
