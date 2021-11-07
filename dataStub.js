@@ -1,51 +1,23 @@
 var data={
-	visualisation:{
+	_visualisation:{
 		layout:"Tabs",
 		shortname:"Data"
 	},
 };
 
-data["Test"] = {
+data["test"] = {
+	_visualisation:{shortname:"Address Test Data"},
 	foo:{
+		_visualisation:{shortname:"Foo",},
 		name:"foo",
 		x:10,
-		bar:"@/Test/bar",
+		bar:"@/test/bar",
 		barAbs:"@../../bar",
 	},
 	bar:{
+		_visualisation:{shortname:"Bar",},
 		name:"bar",
 		x:15,
-		y:['a','b','c'],
+		y:[{fizz:907, buzz:908, woof:true},'b','c'],
 	}
-	/* battery:{
-		name:"9V Battery",
-		voltage:9,
-		connectionPoints:{
-			"anode":{},
-			"cathode":{},
-		},
-	},
-	bulb:{
-		name:"25W Bulb",
-		power:25,
-		connectionPoints:{
-			"leg1":{},
-			"leg2":{},
-		}
-	},
-	wireA:{
-		colour:"red",
-		connects:{
-			point1:"Test/battery/connectionPoints/anode",
-			point2:"Test/bulb/connectionPoints/leg1",
-		}
-	},
-	wireB:{
-		colour:"black",
-		connects:{
-			point1:"",
-			point2:""
-		}
-	} */
-
 }

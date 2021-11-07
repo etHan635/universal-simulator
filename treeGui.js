@@ -295,7 +295,7 @@ function treeGuiOf(node, nodeAddress){
 		let ul = document.createElement("ul");
 		ul.id = nodeAddress;
 		for(key in node){
-			if(key == "_parent"){ continue; }
+			if(key[0] == '_'){ continue; }
 			let li = document.createElement("li");
 			
 			//Show title as click option
@@ -499,24 +499,35 @@ function updateView(){
 	//Build a URL display for the parents of the current node
 	pathDiv.textContent="";
 	
-	for(i = 1; i <= currentView.length; i++){
-		//Create link to current ancestor
+	//Always put link for root node, regardless for contents of currentView
+	let rootLink = document.createElement("a");
+	rootLink.href = urlWithoutParameters + "?view=" + path;
+	rootLink.textContent = nodeName;
+	rootLink.addEventListener("click", function(){ view(path); });
+	pathDiv.appendChild(rootLink);
+
+	for(i = 1; i < currentView.length; i++){
+		//Get next node
+		nodeName = currentView[i];
+		path += "/" + nodeName;
+		node = node[nodeName];
+
+		//Put spacer to prepare for next path segment
+		let spacer = document.createElement("span");
+		spacer.textContent = " / ";
+		pathDiv.appendChild(spacer);
+
+		//Create link to path segment
+		if(typeof node == "object"){
+			if(node._visualisation != undefined){
+				nodeName = node._visualisation.shortname;
+			}
+		}
 		let link = document.createElement("a");
 		link.href = urlWithoutParameters + "?view=" + path;
 		link.textContent = nodeName;
-		link.addEventListener("click", function(){ view(path); })
+		link.addEventListener("click", function(){ view(path); });
 		pathDiv.appendChild(link);
-
-		//If not final node, add '/' and get the next node in the sequence
-		if(i < currentView.length){
-			let spacer = document.createElement("span");
-			spacer.textContent = " / ";
-			pathDiv.appendChild(spacer);
-
-			nodeName = currentView[i];
-			path += "/" + nodeName;
-			node = node[nodeName];
-		}
 	}
 
 	if(path.length==0){
