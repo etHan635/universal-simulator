@@ -1,6 +1,6 @@
 # universal-simulator
 
-##Address System
+## Address System
 Placing '@' at the start of a string indicates that it is an address
 If the address is like '@/foo/bar/biz', then the system finds biz starting from the root node.
 If the address is like '@foo/bar/biz', then the system finds biz relative to a given node.
