@@ -1,4 +1,16 @@
 /*
+ * Returns either the value of a node, or it's _visualisation.shortname if one can be found.
+ * */
+function getNodeText(node, defaultText){
+	if(typeof node == "object"){
+		if(node._visualisation != undefined){
+			defaultText = node._visualisation.shortname;
+		}
+	}
+	return defaultText;
+}
+
+/*
  * Generates a '_parent' field in all children of the provided node.
  * */
 function generateParentRefsInChildren(node, nodeAddress){
@@ -48,7 +60,7 @@ function couldBePath(path){
  * with that of the source.
  * */
 function resolvePath(source, path){
-	console.log("src= " + source + "\t path= " + path); 
+	// console.log("src= " + source + "\t path= " + path); 
 	if(!couldBePath(path)){
 		return undefined;
 	}

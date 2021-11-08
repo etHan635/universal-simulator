@@ -298,7 +298,7 @@ function treeGuiOf(node, nodeAddress){
 			link.classList.add("key");
 			link.id = nodeAddress + "/" + key;
 			link.href = urlWithoutParameters + "?view=" + nodeAddress + "/" + key;
-			link.textContent = key;
+			link.textContent = getNodeText(node[key], key);
 			link.addEventListener("click", view(nodeAddress));
 			li.appendChild(link);
 			
@@ -317,11 +317,13 @@ function treeGuiOf(node, nodeAddress){
 		return ul;
 	} else if(couldBePath(node)){
 		let absNode = resolvePath(nodeAddress, node);
-
+		let nodeAtAddress = getProperty(node, absNode);
+		let nodeName = getNodeText(nodeAtAddress, nodeAtAddress);
+		nodeName += "    (" + node + ")";
 		let link = document.createElement("a");
 		link.id = nodeAddress;
 		link.href = urlWithoutParameters + "?view=" + absNode;
-		link.textContent = node;
+		link.textContent = nodeName;
 		link.addEventListener("click", function(){ view(absNode); });
 		return link;
 	} else {
