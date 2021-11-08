@@ -15,9 +15,9 @@ I renamed 'visualisation' to try and keep a consistent and recognisable naming c
 I attempted to standardise how the tool deals with addresses, eliminating the need for 'isOneOfRelative', 'this', and '&'. This involved:
 
 * Standardising address notation. All addresses should start with '@' to set them apart from strings
-* This system is now **natively relative**. The path foo.bar = '@biz' will point to the (nonexistent) foo.bar.biz
-* Borrowing from Unix-like representations, the user can define an **absolute path** by placing '/' at the start of an address. The path foo.bar = '@/biz' will point to <root_node>.biz 
-* Using the \_parent field, I have added the ability for pathes to **point backwards**. The path foo.bar = '@../biz' will point to foo.biz
+* This system is now **natively relative**. The path foo.bar = '@baz' will point to the (nonexistent) foo.bar.baz
+* Borrowing from Unix-like representations, the user can define an **absolute path** by placing '/' at the start of an address. The path foo.bar = '@/baz' will point to <root_node>.baz 
+* Using the \_parent field, I have added the ability for pathes to **point backwards**. The path foo.bar = '@../baz' will point to foo.baz
 
 Note that this solution is somewhat lacking, as only objects support a parent field. 
 At present, I get around this by resolving relative paths into absolute paths during GUI generation, but I foresee issues when having to directly access such things e.g. for transform parameters.
