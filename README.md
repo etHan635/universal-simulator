@@ -1,17 +1,17 @@
 # universal-simulator
 This is a refactoring of QLab's universal simulator, aiming to streamline the implementation of existing functionality.
 
-##Changes
-###Decomposition
+## Changes
+### Decomposition
 I decomposed much of the legacy code, moving it from an embedded script in minimalGame3.html into separate files, for the purpose of improving readability.
 
-###\_parent
+### \_parent
 I added in a system which generates a \_parent field for all objects, providing the address of their parent.
 
-###\_visualisation
+### \_visualisation
 I renamed 'visualisation' to try and keep a consistent and recognisable naming convention for 'metadata'.
 
-###Addresses
+### Addresses
 I attempted to standardise how the tool deals with addresses, eliminating the need for 'isOneOfRelative', 'this', and '&'. This involved:
 
 * Standardising address notation. All addresses should start with '@' to set them apart from strings
@@ -22,7 +22,7 @@ I attempted to standardise how the tool deals with addresses, eliminating the ne
 Note that this solution is somewhat lacking, as only objects support a parent field. 
 At present, I get around this by resolving relative paths into absolute paths during GUI generation, but I foresee issues when having to directly access such things e.g. for transform parameters.
 
-###Tree GUI
+### Tree GUI
 I significantly altered the Tree-based GUI.
 
 * Made GUI generator compatible with the new address system.
