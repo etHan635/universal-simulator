@@ -13,11 +13,9 @@ var currentActions = {};
  * 
  *
  * */
-function getProperty(node, path, validatePath = true){
-	if(validatePath){
-		if(!couldBePath(path)){
-			return undefined;
-		}
+function getProperty(node, path){
+	if(!couldBePath(path)){
+		return undefined;
 	}
 	//(from here on, assume valid)
 	//Remove @/ (as we know we have to start at data)
@@ -36,14 +34,14 @@ function getProperty(node, path, validatePath = true){
 		if(!(typeof node == "object")){
 			return undefined;
 		}
-		let child = path[i];
-		if(child == ".."){
+		let step = path[i];
+		if(step == ".."){
 			//Not ideal, as will only work for objects and arrays.
 			//Can't get parent of primitives, but shouldn't need to for
 			//our purposes.
 			node = getProperty(node, node._parent);
-		} else if(child in node){
-			node = node[child];
+		} else if(step in node){
+			node = node[step];
 		} else {
 			return undefined;
 		}
