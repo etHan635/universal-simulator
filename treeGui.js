@@ -289,16 +289,6 @@ function treeGuiOf(node, nodeAddress){
 		if(array){
 			ul.classList.add("array");
 		}
-		if(node._src != undefined){
-			let button = document.createElement("button");
-			button.textContent = "load";
-			button.addEventListener("click", function(){
-				//prompt loading of node
-				getProperty(node, "@_src");
-				currentViewNeedsUpdating = true;
-			})
-			return button;
-		}
 		for(key in node){
 			if(key[0] == '_'){ continue; }
 			let li = document.createElement("li");
@@ -327,7 +317,7 @@ function treeGuiOf(node, nodeAddress){
 		return ul;
 	} else if(couldBePath(node)){
 		let absNode = resolvePath(nodeAddress, node);
-		let nodeAtAddress = getProperty(node, absNode, false);
+		let nodeAtAddress = getProperty(node, absNode);
 		let nodeName = getNodeText(nodeAtAddress, nodeAtAddress);
 		nodeName += "    (" + node + ")";
 		let link = document.createElement("a");
@@ -521,11 +511,7 @@ function updateView(){
 		//Get next node
 		nodeName = currentView[i];
 		path += "/" + nodeName;
-		if(node[nodeName] != undefined){
-			node = node[nodeName];
-		} else {//Failsafe to try and load external data
-			node = getProperty(node, "@" + nodeName);
-		}
+		node = node[nodeName];
 
 		//Put spacer to prepare for next path segment
 		let spacer = document.createElement("span");

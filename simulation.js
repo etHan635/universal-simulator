@@ -13,9 +13,11 @@ var currentActions = {};
  * 
  *
  * */
-function getProperty(node, path, load = true){
-	if(!couldBePath(path)){
-		return undefined;
+function getProperty(node, path, validatePath = true){
+	if(validatePath){
+		if(!couldBePath(path)){
+			return undefined;
+		}
 	}
 	//(from here on, assume valid)
 	//Remove @/ (as we know we have to start at data)
@@ -34,32 +36,14 @@ function getProperty(node, path, load = true){
 		if(!(typeof node == "object")){
 			return undefined;
 		}
-		if(node._src != undefined){
-			// console.log("something needs loaded.\t" + node + "\t" + path);
-			if(load){
-				// console.log("trying to load from '" + node._src + "'...");
-				let file = new XMLHttpRequest();
-				file.overrideMimeType("application/json");
-				file.responseType = "json";
-				file.open("GET", urlWithoutParameters + "/../" + node._src, true);
-				file.onreadystatechange = function(){
-					if(file.readyState === 4 && (file.status === 200 || file.status === 0)){
-						node = file.response;
-						console.log(node);
-					}
-				} 
-				file.send(null);
-				// console.log(node);
-			}
-		}
-		let step = path[i];
-		if(step == ".."){
+		let child = path[i];
+		if(child == ".."){
 			//Not ideal, as will only work for objects and arrays.
 			//Can't get parent of primitives, but shouldn't need to for
 			//our purposes.
 			node = getProperty(node, node._parent);
-		} else if(step in node){
-			node = node[step];
+		} else if(child in node){
+			node = node[child];
 		} else {
 			return undefined;
 		}

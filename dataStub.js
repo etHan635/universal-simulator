@@ -33,10 +33,4 @@ data["test"] = {
 			],
 		},
 	},
-	ext:"@/external/ext1",
-}
-
-data["external"] = {
-	_visualisation:{shortname:"External Test Data",},
-	_src:"data_structures/external_test_data.json",
 }
