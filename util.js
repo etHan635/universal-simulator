@@ -42,13 +42,28 @@ function generateParentRef(node, parentAddress, nodeKey){
 /*
  * Checks whether 'path' could be a path
  * i.e. matches '@foo/bar/fiz'.
+ * 
+ * If 'abs' is true, only returns affirmative if 'path'
+ * could be an absolute path.
+ *
  * This doesn't check whether data.foo.bar.fiz actually exists.
  * */
-function couldBePath(path){
+function couldBePath(path, abs = false){
 	if(typeof path === "string"){
-		if(path.length > 1){
+		//4 cases:	non-abs('@', '@foo'), 
+		//		abs('@/', '@/foo')
+		if(path.length > 0){
 			if(path[0] == '@'){
-				return true;
+				if(abs){
+					//Explore further, make sure next char is '/'
+					if(path.length > 1){
+						if(path[1] == '/'){
+							return true;
+						}
+					}
+				} else {
+					return true;
+				}
 			}
 		}
 	}
