@@ -1,5 +1,6 @@
 var pathDiv = document.getElementById("path");
 var contentDiv = document.getElementById("content");
+
 /* Generate Tree GUI for the current node and all children, including links */
 function treeGuiOf(node, nodeAddress){
 	if(typeof node == "object"){
@@ -11,10 +12,26 @@ function treeGuiOf(node, nodeAddress){
 			ul.classList.add("array");
 		}
 		for(key in node){
-			if(key[0] == '_'){ continue; }
+			if(key[0] == '_'){
+				if(key == "_visibleActions"){
+					let visibleActions = node._visibleActions;
+
+					let fieldSet = document.createElement("fieldset");
+					let legend = document.createElement("legend");
+					legend.textContent = "Actions";
+					fieldSet.appendChild(legend);
+					for(i = 0; i < visibleActions.length; i++){
+						fieldSet.appendChild(treeGuiOfAction(visibleActions[i], nodeAddress + "/_visibleActions/" + i));
+					}
+					ul.appendChild(fieldSet);
+				}
+				continue; 
+			}
+
+
 			let li = document.createElement("li");
 			
-			//Show title as click option
+			//Show key as click option
 			let link = document.createElement("a");
 			link.classList.add("key");
 			link.id = nodeAddress + "/" + key;
@@ -53,6 +70,13 @@ function treeGuiOf(node, nodeAddress){
 		span.innerHTML = node;
 		return span;
 	}
+}
+
+function treeGuiOfAction(node, nodeAddress){
+	let h4 = document.createElement("h4");
+	h4.id = nodeAddress;
+	h4.textContent = node;
+	return h4;
 }
 
 //Build the menu buttons and then recursively print out the properties

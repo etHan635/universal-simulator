@@ -9,7 +9,7 @@ data["test"] = {
 	_visualisation:{shortname:"Address Test Data"},
 	foo:{
 		_visualisation:{shortname:"Foo",},
-		visibleActions:["@/actionTest/addTenToX",],
+		_visibleActions:["@/actionTest/addTenToX",],
 		name:"foo",
 		x:10,
 		bar:"@/test/bar",
