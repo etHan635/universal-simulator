@@ -19,7 +19,6 @@ function navigateTo(address,dontBackup=false)
 	selectedOption = {};
 
 	guiUpdateTrigger = true;
-	updateView();
 }
 
 /*

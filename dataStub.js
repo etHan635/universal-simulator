@@ -10,7 +10,13 @@ data["test"] = {
 	_visualisation:{shortname:"Address Test Data"},
 	foo:{
 		_visualisation:{shortname:"Foo",},
-		_visibleActions:["@/actionTest/addTenToX",],
+		_visibleActions:[
+			"@/actionTest/addTenToX",
+			{
+				_visualisation:{shortname:"X = -90",},
+				duration:1.0,
+			},
+		],
 		name:"foo",
 		x:10,
 		bar:"@/test/bar",
@@ -43,5 +49,19 @@ data["actionTest"] = {
 		duration:1.0,		//The duration of the action
 		preconditions:[],	//What must be true for action to be executed
 		arguments:[],		//The arguments provided, used in transforms
+		transforms:[
+			{
+				time:0.0,
+				message:"Pre-action",
+			},
+			{
+				time:0.5,
+				message:"Peri-action",
+			},
+			{
+				time:1.0,
+				message:"Post-action",
+			}
+		]
 	}
 }
