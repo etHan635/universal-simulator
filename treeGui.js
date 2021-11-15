@@ -83,7 +83,7 @@ function treeGuiOfAction(node, nodeAddress){
 	button.id = nodeAddress;
 	button.textContent = nodeName;
 	button.addEventListener("click", function(){
-		initialiseAction(nodeAddress);
+		invokeAction(nodeAddress);
 	})
 	return button;
 }

@@ -1,16 +1,45 @@
+if(frame == undefined){
+	
+}
 var frame = 0;
 var absoluteTime = 0.0;
 
 var currentActions = [];
 
+function performAction(actionInstance, stage){
+	if(actionInstance.action != undefined){
+		let action = actionInstance.action;
+		if(action.transforms != undefined){
+			let transforms = action.transforms;
+			if(transforms[stage] != undefined){
+				//Do transforms for that stage
+				transforms = transforms[stage];
+				for(i = 0; i < transforms.length; i++){
+					let transform = transforms[i];
+					console.log(transform);
+				}
+			}
+		}
+	}
+}
+
 /**
  * Initialises an action given a local address (i.e. the ref to the action in the agent calling it).
  * Supports both an action embedded within an object, and a separate action to which an actor merely has a reference.
  */
-function initialiseAction(actionAddress){
+function invokeAction(actionAddress){
+	//Get both action and agent
 	let action = followPath(data, actionAddress);
-	
-	console.log(action);
+	let agent = followPath(data, resolvePath(actionAddress, "@../.."));
+
+	let actionInstance = {
+		timeElapsed: 0.0,
+		action: action,
+		agent: agent,
+	};
+
+	currentActions.push(actionInstance);
+	guiUpdateTrigger = true;
 }
 
 /*
@@ -24,14 +53,32 @@ function updateSimulation(delta){
 	document.getElementById("frame").textContent = "frame: " + frame;
 	document.getElementById("time").textContent = Math.round(absoluteTime) + "s";
 
+	let toRemove = [];
 
-	//Placeholder for MainLoop
+	for(i = 0; i < currentActions.length; i++){
+		let action = currentActions[i];
+		//Choose which set of transforms to perform depending on time elapsed
+		if(action.timeElapsed <= 0.0){
+			performAction(action, "pre");
+		} else if(action.timeElapsed > action.action.duration){
+			toRemove.push(i);
+			performAction(action, "post");
+		} else {
+			performAction(action, "peri");
+		}
+		action.timeElapsed += delta_s;
+	}
+
+	for(i = 0; i < toRemove.length; i++){
+		currentActions.splice(toRemove[i], 1);
+	}
+
 	if(guiUpdateTrigger){
 		if(data._visualisation.layout == "tree"){
 			updateTreeGui();
 		}
 		guiUpdateTrigger = false;
-	}	
+	}
 }
 
 function drawSimulation(){

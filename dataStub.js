@@ -46,22 +46,19 @@ data["actionTest"] = {
 	_visualisation:{shortname:"Action Test Data"},
 	addTenToX:{
 		_visualisation:{shortname:"X += 10",},
-		duration:1.0,		//The duration of the action
+		duration:5.0,		//The duration of the action
 		preconditions:[],	//What must be true for action to be executed
 		arguments:[],		//The arguments provided, used in transforms
-		transforms:[
-			{
-				time:0.0,
-				message:"Pre-action",
-			},
-			{
-				time:0.5,
-				message:"Peri-action",
-			},
-			{
-				time:1.0,
-				message:"Post-action",
-			}
-		]
-	}
-}
+		transforms:{
+			pre:[
+				{ message:"Beginning", },
+			],
+			post:[
+				{ message:"Ending", },
+			],
+			peri:[
+				{ message:"Ongoing", },
+			]
+		},
+	},
+};
