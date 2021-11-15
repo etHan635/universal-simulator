@@ -83,7 +83,7 @@ function treeGuiOfAction(node, nodeAddress){
 	button.id = nodeAddress;
 	button.textContent = nodeName;
 	button.addEventListener("click", function(){
-		invokeAction(nodeAddress);
+		invokeAction(nodeAddress, []);
 	})
 	return button;
 }
@@ -103,7 +103,6 @@ function updateTreeGui(){
 	rootLink.addEventListener("click", function(){ navigateTo(path); });
 	pathDiv.appendChild(rootLink);
 
-	console.log(rootAddress);
 	let currentView = rootAddress.split('/');
 
 	for(i = 1; i < currentView.length; i++){

@@ -18,20 +18,27 @@ function performAction(actionInstance, stage){
 					let transform = transforms[i];
 					console.log(transform);
 					if(transform[0] == "add"){
+						let nodeAddress = followPath(actionInstance, transform[1]);
+						let delta = followPath(actionInstance, transform[2]);
 						followPath(
-							actionInstance.agent, transform[1], 
-							followPath(actionInstance.agent, transform[1]) + transform[2]
+							actionInstance, nodeAddress, 
+							followPath(actionInstance, nodeAddress) + delta
 						);
 					} else if(transform[0] == "set"){
-						followPath(actionInstance.agent, transform[1], transform[2]);
-					} else if(transform[0] == "delete"){
+						followPath(
+							actionInstance,
+							followPath(actionInstance, transform[1]),
+							followPath(actionInstance, transform[2])
+						);
+						// followPath(actionInstance.agent, transform[1], transform[2]);
+					} else if(transform[0] == "remove"){
 						//This is a bit more awkward - we need to delete the property via its parent
-						let toDeleteAddress = transform[1];
+						let toDeleteAddress = followPath(actionInstance, transform[1]);
 						let parentOfToDeleteAddress = toDeleteAddress.substring(1).split('/');
 						let toDelete = parentOfToDeleteAddress.pop();
 						parentOfToDeleteAddress = "@" + parentOfToDeleteAddress.join('/');
 
-						let parentOfToDelete = followPath(actionInstance.agent, parentOfToDeleteAddress);
+						let parentOfToDelete = followPath(actionInstance, parentOfToDeleteAddress);
 						delete parentOfToDelete[toDelete];
 					}
 				}
@@ -45,7 +52,7 @@ function performAction(actionInstance, stage){
  * Initialises an action given a local address (i.e. the ref to the action in the agent calling it).
  * Supports both an action embedded within an object, and a separate action to which an actor merely has a reference.
  */
-function invokeAction(actionAddress){
+function invokeAction(actionAddress, args){
 	//Get both action and agent
 	let action = followPath(data, actionAddress);
 	let agent = followPath(data, resolvePath(actionAddress, "@../.."));
@@ -54,7 +61,25 @@ function invokeAction(actionAddress){
 		timeElapsed: 0.0,
 		action: action,
 		agent: agent,
+		args: args, 
 	};
+
+	//Temporary manual population, until GUI is up and running
+	if(action == data.actionTest.add){
+		actionInstance.args = {
+			nodeAddress:"@agent/x",
+			delta:10,
+		};
+	} else if(action == data.actionTest.set){
+		actionInstance.args = {
+			nodeAddress:"@agent/x",
+			value:0,
+		};
+	} else if(action == data.actionTest.remove){
+		actionInstance.args = {
+			nodeAddress:"@agent/x",
+		};
+	}
 
 	currentActions.push(actionInstance);
 	guiUpdateTrigger = true;

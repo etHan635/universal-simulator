@@ -11,16 +11,12 @@ data["test"] = {
 	foo:{
 		_visualisation:{shortname:"Foo",},
 		_visibleActions:[
-			"@/actionTest/addTenToX",
-			{
-				_visualisation:{shortname:"Create/Reset agent.x",},
-				duration:1.0,
-				transforms:{pre:[["set", "@x", 0]]}
-			},
-			"@/actionTest/removeX",
+			"@/actionTest/add",
+			"@/actionTest/set",
+			"@/actionTest/remove",
 		],
 		name:"foo",
-		// x:10,
+		x:10,
 		bar:"@/test/bar",
 		barAbs:"@../../bar",
 	},
@@ -63,14 +59,19 @@ data["actionTest"] = {
 			]
 		},
 	},
-	addTenToX:{
-		_visualisation:{shortname:"Increment agent.x by 10",},
+	add:{
+		_visualisation:{shortname:"Increment Value",},
 		duration:0.0,
-		transforms:{pre:[["add", "@x", 10]]}
+		transforms:{pre:[["add", "@args/nodeAddress", "@args/delta"]]}
 	},
-	removeX:{
-		_visualisation:{shortname:"Delete agent.x"},
+	set:{
+		_visualisation:{shortname:"Add/Set Property",},
 		duration:0.0,
-		transforms:{pre:[["delete", "@x"]]}
+		transforms:{pre:[["set", "@args/nodeAddress", "@args/value"]]}
+	},
+	remove:{
+		_visualisation:{shortname:"Remove Node"},
+		duration:0.0,
+		transforms:{pre:[["remove", "@args/nodeAddress"]]}
 	}
 };

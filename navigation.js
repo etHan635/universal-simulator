@@ -71,7 +71,8 @@ function followPath(node, path, value = undefined){
 				node = node[step];
 
 				//Try to resolve a suspected address
-				if(couldBePath(node)){
+				//(ABSOLUTE ONLY TODO fix for relative also)
+				if(couldBePath(node, true)){
 					node = followPath(node, node);
 				}
 
