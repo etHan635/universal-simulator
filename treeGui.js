@@ -98,11 +98,12 @@ function updateTreeGui(){
 	
 	//Always put link for root node, regardless for contents of currentView
 	let rootLink = document.createElement("a");
-	rootLink.href = URL_WITHOUT_PARAMETERS + "?view=" + path;
+	rootLink.href = URL_WITHOUT_PARAMETERS + "?view=@";
 	rootLink.textContent = nodeName;
 	rootLink.addEventListener("click", function(){ navigateTo(path); });
 	pathDiv.appendChild(rootLink);
 
+	console.log(rootAddress);
 	let currentView = rootAddress.split('/');
 
 	for(i = 1; i < currentView.length; i++){
