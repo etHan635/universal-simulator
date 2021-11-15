@@ -89,7 +89,7 @@ function treeGuiOfAction(node, nodeAddress){
 }
 
 //Build the menu buttons and then recursively print out the properties
-function updateTreeGui(){//TODO fix addressing so that root is @/ rather than @
+function updateTreeGui(){
 	let path = "@";
 	let nodeName = "@";
 	let node = data;
@@ -98,12 +98,12 @@ function updateTreeGui(){//TODO fix addressing so that root is @/ rather than @
 	
 	//Always put link for root node, regardless for contents of currentView
 	let rootLink = document.createElement("a");
-	rootLink.href = URL_WITHOUT_PARAMETERS + "?view=@/";
+	rootLink.href = URL_WITHOUT_PARAMETERS + "?view=" + path;
 	rootLink.textContent = nodeName;
 	rootLink.addEventListener("click", function(){ navigateTo(path); });
 	pathDiv.appendChild(rootLink);
 
-	let currentView = rootAddress.split('/').splice(0, 1);
+	let currentView = rootAddress.split('/');
 
 	for(i = 1; i < currentView.length; i++){
 		//Get next node
