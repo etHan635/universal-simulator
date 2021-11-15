@@ -104,6 +104,7 @@ function updateTreeGui(){
 	pathDiv.appendChild(rootLink);
 
 	let currentView = rootAddress.split('/');
+
 	for(i = 1; i < currentView.length; i++){
 		//Get next node
 		nodeName = currentView[i];

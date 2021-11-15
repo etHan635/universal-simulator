@@ -17,7 +17,25 @@ function performAction(actionInstance, stage){
 				for(i = 0; i < transforms.length; i++){
 					let transform = transforms[i];
 					console.log(transform);
+					if(transform[0] == "add"){
+						followPath(
+							actionInstance.agent, transform[1], 
+							followPath(actionInstance.agent, transform[1]) + transform[2]
+						);
+					} else if(transform[0] == "set"){
+						followPath(actionInstance.agent, transform[1], transform[2]);
+					} else if(transform[0] == "delete"){
+						//This is a bit more awkward - we need to delete the property via its parent
+						let toDeleteAddress = transform[1];
+						let parentOfToDeleteAddress = toDeleteAddress.substring(1).split('/');
+						let toDelete = parentOfToDeleteAddress.pop();
+						parentOfToDeleteAddress = "@" + parentOfToDeleteAddress.join('/');
+
+						let parentOfToDelete = followPath(actionInstance.agent, parentOfToDeleteAddress);
+						delete parentOfToDelete[toDelete];
+					}
 				}
+				guiUpdateTrigger = true;
 			}
 		}
 	}

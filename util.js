@@ -75,7 +75,6 @@ function couldBePath(path, abs = false){
  * with that of the source.
  * */
 function resolvePath(source, path){
-	// console.log("src= " + source + "\t path= " + path); 
 	if(!couldBePath(path)){
 		return undefined;
 	}

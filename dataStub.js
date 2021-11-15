@@ -13,12 +13,14 @@ data["test"] = {
 		_visibleActions:[
 			"@/actionTest/addTenToX",
 			{
-				_visualisation:{shortname:"X = -90",},
+				_visualisation:{shortname:"Create/Reset agent.x",},
 				duration:1.0,
+				transforms:{pre:[["set", "@x", 0]]}
 			},
+			"@/actionTest/removeX",
 		],
 		name:"foo",
-		x:10,
+		// x:10,
 		bar:"@/test/bar",
 		barAbs:"@../../bar",
 	},
@@ -44,8 +46,8 @@ data["test"] = {
 }
 data["actionTest"] = {
 	_visualisation:{shortname:"Action Test Data"},
-	addTenToX:{
-		_visualisation:{shortname:"X += 10",},
+	sampleAction:{
+		_visualisation:{shortname:"Example",},
 		duration:5.0,		//The duration of the action
 		preconditions:[],	//What must be true for action to be executed
 		arguments:[],		//The arguments provided, used in transforms
@@ -61,4 +63,14 @@ data["actionTest"] = {
 			]
 		},
 	},
+	addTenToX:{
+		_visualisation:{shortname:"Increment agent.x by 10",},
+		duration:0.0,
+		transforms:{pre:[["add", "@x", 10]]}
+	},
+	removeX:{
+		_visualisation:{shortname:"Delete agent.x"},
+		duration:0.0,
+		transforms:{pre:[["delete", "@x"]]}
+	}
 };

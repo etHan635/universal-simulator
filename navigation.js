@@ -24,13 +24,20 @@ function navigateTo(address,dontBackup=false)
 /*
  * Follows the path, starting at 'node', returning whatever is found at the end.
  * */
-function followPath(node, path){
+function followPath(node, path, value = undefined){
 	if(!couldBePath(path)){
 		return undefined;
 	}
 	//(from here on, assume valid)
 	//Remove @/ (as we know we have to start at data)
 	path = path.substring(1);
+
+	//If no path, we don't need to do any further operations
+	if(path.length == 0){
+		return node;
+	}
+
+
 	path = path.split('/');
 	
 	//If first stage of path is empty, i.e. '/foo/bar',
@@ -51,16 +58,31 @@ function followPath(node, path){
 			//Can't get parent of primitives, but shouldn't need to for
 			//our purposes.
 			node = followPath(node, node._parent);
-		} else if(step in node){
-			node = node[step];
 		} else {
-			return undefined;
-		}
+			if(value != undefined){
+				//About to go to final point, 
+				//check whether we need to set anything
+				if(i == path.length - 1){
+					node[step] = value;
+				}
+			}
 
-		//Try to resolve a suspected address
-		if(couldBePath(node)){
-			node = followPath(node, node);
-		}
+			if(step in node){
+				node = node[step];
+
+				//Try to resolve a suspected address
+				if(couldBePath(node)){
+					node = followPath(node, node);
+				}
+
+			} else {
+				return undefined;
+			}
+		} 	
+	}
+
+	if(value != undefined){
+
 	}
 	return node;
 }
