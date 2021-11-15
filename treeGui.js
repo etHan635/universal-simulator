@@ -73,10 +73,19 @@ function treeGuiOf(node, nodeAddress){
 }
 
 function treeGuiOfAction(node, nodeAddress){
-	let h4 = document.createElement("h4");
-	h4.id = nodeAddress;
-	h4.textContent = node;
-	return h4;
+	//Check if action is local or needs to be fetched
+	if(couldBePath(node)){
+		node = followPath(node, resolvePath(nodeAddress, node));
+	}
+	let nodeName = getNodeText(node, node);
+
+	let button = document.createElement("button");
+	button.id = nodeAddress;
+	button.textContent = nodeName;
+	button.addEventListener("click", function(){
+		console.log(node);
+	})
+	return button;
 }
 
 //Build the menu buttons and then recursively print out the properties
