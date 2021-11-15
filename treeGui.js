@@ -89,7 +89,7 @@ function treeGuiOfAction(node, nodeAddress){
 }
 
 //Build the menu buttons and then recursively print out the properties
-function updateView(){
+function updateTreeGui(){
 	let path = "@";
 	let nodeName = "@";
 	let node = data;

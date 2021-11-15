@@ -10,7 +10,9 @@ var currentActions = {};
 function updateSimulation(){
 	//Placeholder for MainLoop
 	if(guiUpdateTrigger){
-		updateView();
+		if(data._visualisation.layout == "tree"){
+			updateTreeGui();
+		}
 		guiUpdateTrigger = false;
 	}	
 }

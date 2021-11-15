@@ -1,8 +1,9 @@
 var data={
 	_visualisation:{
-		layout:"Tabs",
+		layout:"tree",
 		shortname:"Data"
 	},
+
 };
 
 data["test"] = {
