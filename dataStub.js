@@ -46,7 +46,7 @@ data["actionTest"] = {
 		_visualisation:{shortname:"Example",},
 		duration:5.0,		//The duration of the action
 		preconditions:[],	//What must be true for action to be executed
-		arguments:[],		//The arguments provided, used in transforms
+		parameters:[],		//The parameters needed, used in transforms
 		transforms:{
 			pre:[
 				{ message:"Beginning", },
@@ -60,18 +60,36 @@ data["actionTest"] = {
 		},
 	},
 	add:{
-		_visualisation:{shortname:"Increment Value",},
+		_visualisation:{shortname:"Add 10 to Node",},
 		duration:0.0,
-		transforms:{pre:[["add", "@args/nodeAddress", "@args/delta"]]}
+		params:{
+			numberAddress:{
+				options:"@agent/*",	//'working directory' is actionInstance
+			},
+			delta:{
+				_const:true,
+				value:10,
+			},
+		},
+		transforms:{pre:[["add", "@args/numberAddress", "@args/delta"]]}
 	},
 	set:{
-		_visualisation:{shortname:"Add/Set Property",},
+		_visualisation:{shortname:"Set Node",},
 		duration:0.0,
+		params:{
+			nodeAddress:{
+			},
+			value:{
+			}
+		},
 		transforms:{pre:[["set", "@args/nodeAddress", "@args/value"]]}
 	},
 	remove:{
 		_visualisation:{shortname:"Remove Node"},
 		duration:0.0,
+		params:{
+			nodeAddress:{options:"@agent/*"},
+		},
 		transforms:{pre:[["remove", "@args/nodeAddress"]]}
 	}
 };

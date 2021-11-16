@@ -2,6 +2,11 @@
  * Returns either the value of a node, or it's _visualisation.shortname if one can be found.
  * */
 function getNodeText(node, defaultText){
+	if(couldBePath(node, true)){
+		//Try to follow path
+		node = followPath(data, node);
+	}
+
 	if(typeof node == "object"){
 		if(node._visualisation != undefined){
 			defaultText = node._visualisation.shortname;

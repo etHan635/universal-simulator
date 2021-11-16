@@ -6,6 +6,34 @@ var absoluteTime = 0.0;
 
 var currentActions = [];
 
+function performTransform(transform, actionInstance){
+	console.log(transform);
+	if(transform[0] == "add"){
+		let nodeAddress = followPath(actionInstance, transform[1]);
+		let delta = followPath(actionInstance, transform[2]);
+		followPath(
+			actionInstance, nodeAddress, 
+			followPath(actionInstance, nodeAddress) + delta
+		);
+	} else if(transform[0] == "set"){
+		followPath(
+			actionInstance,
+			followPath(actionInstance, transform[1]),
+			followPath(actionInstance, transform[2])
+		);
+		// followPath(actionInstance.agent, transform[1], transform[2]);
+	} else if(transform[0] == "remove"){
+		//This is a bit more awkward - we need to delete the property via its parent
+		let toDeleteAddress = followPath(actionInstance, transform[1]);
+		let parentOfToDeleteAddress = toDeleteAddress.substring(1).split('/');
+		let toDelete = parentOfToDeleteAddress.pop();
+		parentOfToDeleteAddress = "@" + parentOfToDeleteAddress.join('/');
+
+		let parentOfToDelete = followPath(actionInstance, parentOfToDeleteAddress);
+		delete parentOfToDelete[toDelete];
+	}
+}
+
 function performAction(actionInstance, stage){
 	if(actionInstance.action != undefined){
 		let action = actionInstance.action;
@@ -16,31 +44,7 @@ function performAction(actionInstance, stage){
 				transforms = transforms[stage];
 				for(i = 0; i < transforms.length; i++){
 					let transform = transforms[i];
-					console.log(transform);
-					if(transform[0] == "add"){
-						let nodeAddress = followPath(actionInstance, transform[1]);
-						let delta = followPath(actionInstance, transform[2]);
-						followPath(
-							actionInstance, nodeAddress, 
-							followPath(actionInstance, nodeAddress) + delta
-						);
-					} else if(transform[0] == "set"){
-						followPath(
-							actionInstance,
-							followPath(actionInstance, transform[1]),
-							followPath(actionInstance, transform[2])
-						);
-						// followPath(actionInstance.agent, transform[1], transform[2]);
-					} else if(transform[0] == "remove"){
-						//This is a bit more awkward - we need to delete the property via its parent
-						let toDeleteAddress = followPath(actionInstance, transform[1]);
-						let parentOfToDeleteAddress = toDeleteAddress.substring(1).split('/');
-						let toDelete = parentOfToDeleteAddress.pop();
-						parentOfToDeleteAddress = "@" + parentOfToDeleteAddress.join('/');
-
-						let parentOfToDelete = followPath(actionInstance, parentOfToDeleteAddress);
-						delete parentOfToDelete[toDelete];
-					}
+					performTransform(transform, actionInstance);
 				}
 				guiUpdateTrigger = true;
 			}
@@ -49,38 +53,10 @@ function performAction(actionInstance, stage){
 }
 
 /**
- * Initialises an action given a local address (i.e. the ref to the action in the agent calling it).
- * Supports both an action embedded within an object, and a separate action to which an actor merely has a reference.
+ * Adds an action instance to currentActions.
  */
-function invokeAction(actionAddress, args){
-	//Get both action and agent
-	let action = followPath(data, actionAddress);
-	let agent = followPath(data, resolvePath(actionAddress, "@../.."));
-
-	let actionInstance = {
-		timeElapsed: 0.0,
-		action: action,
-		agent: agent,
-		args: args, 
-	};
-
-	//Temporary manual population, until GUI is up and running
-	if(action == data.actionTest.add){
-		actionInstance.args = {
-			nodeAddress:"@agent/x",
-			delta:10,
-		};
-	} else if(action == data.actionTest.set){
-		actionInstance.args = {
-			nodeAddress:"@agent/x",
-			value:0,
-		};
-	} else if(action == data.actionTest.remove){
-		actionInstance.args = {
-			nodeAddress:"@agent/x",
-		};
-	}
-
+function invokeAction(actionInstance){
+	actionInstance.timeElapsed = 0.0;
 	currentActions.push(actionInstance);
 	guiUpdateTrigger = true;
 }
