@@ -12,11 +12,13 @@ data["test"] = {
 		_visualisation:{shortname:"Foo",},
 		_visibleActions:[
 			"@/actionTest/add",
+			"@/actionTest/add10ToX",
 			"@/actionTest/set",
 			"@/actionTest/remove",
 		],
 		name:"foo",
 		x:10,
+		y:[{fizz:907, buzz:908, woof:true},'b','c'],
 		bar:"@/test/bar",
 		barAbs:"@../../bar",
 	},
@@ -39,7 +41,7 @@ data["test"] = {
 			],
 		},
 	},
-}
+};
 data["actionTest"] = {
 	_visualisation:{shortname:"Action Test Data"},
 	sampleAction:{
@@ -59,15 +61,28 @@ data["actionTest"] = {
 			]
 		},
 	},
+	add10ToX:{
+		_visualisation:{shortname:"Change agent.x by Delta"},
+		duration:0.0,
+		preconditions:[
+			["exists", "@args/numberAddress"],
+		],
+		params:{
+			numberAddress:{	type:"readonly", value:"@agent/x", },
+			delta:{ type:"enter", inputType:"number", },
+		},
+		transforms:{pre:[["add", "@args/numberAddress", "@args/delta"]]}
+	},
 	add:{
 		_visualisation:{shortname:"Add 10 to Node",},
 		duration:0.0,
 		params:{
 			numberAddress:{
+				type:"pick",
 				options:"@agent/*",	//'working directory' is actionInstance
 			},
 			delta:{
-				_const:true,
+				type:"readonly",
 				value:10,
 			},
 		},
@@ -78,8 +93,10 @@ data["actionTest"] = {
 		duration:0.0,
 		params:{
 			nodeAddress:{
+				type:"enter",
 			},
 			value:{
+				type:"enter",
 			}
 		},
 		transforms:{pre:[["set", "@args/nodeAddress", "@args/value"]]}
@@ -88,7 +105,10 @@ data["actionTest"] = {
 		_visualisation:{shortname:"Remove Node"},
 		duration:0.0,
 		params:{
-			nodeAddress:{options:"@agent/*"},
+			nodeAddress:{
+				type:"pick",
+				options:"@agent/*"
+			},
 		},
 		transforms:{pre:[["remove", "@args/nodeAddress"]]}
 	}

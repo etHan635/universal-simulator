@@ -20,9 +20,8 @@ function treeGuiOf(node, nodeAddress){
 				continue; 
 			}
 
-
 			let li = document.createElement("li");
-			
+
 			//Show key as click option
 			let link = document.createElement("a");
 			link.classList.add("key");
@@ -132,22 +131,44 @@ function treeGuiOfActionInstance(actionInstance, actionLocalAddress){
 	let keys = Object.keys(params);
 	for(i = 0; i < keys.length; i++){
 		let key = keys[i];
-		if(key[0] == '_'){ continue; }
+		if(key[0] == "_"){ continue; }
 		let param = params[key];
-		if(param._const != undefined){
-			actionInstance.args[key] = param.value;
-			continue; 
-		}
+		
 		let li = document.createElement("li");
 		let link = document.createElement("a");
 		link.textContent = key + " = ";
 		li.appendChild(link);
 
-		//Pick from predefined range of options
-		if(param.options != undefined){
+		let type = param.type;
+		if(type == "readonly"){	
+			//Merely display a predefined value.
+			let value = param.value;
+			actionInstance.args[key] = value;
+
+			if(couldBePath(value)){
+				if(value.includes("@agent")){
+					value = value.replace("@agent", agentAddress);
+				}
+			}
+			li.appendChild(treeGuiOf(value, actionLocalAddress + "/params/" + key));
+			
+		} else if(type == "enter"){
+			//Get the value from user input.
+			let inputType = param.inputType;
+			let input = document.createElement("input");
+			input.type = inputType;
+			input.addEventListener("change", function(){
+				let value = input.value;
+				if(inputType == "number"){
+					value = Number(value);
+				}
+				actionInstance.args[key] = value;
+			});
+			li.appendChild(input);
+		} else if(type == "pick"){
+			//Have the user pick the value from a predefined range of options
 			let possibilities = param.options;
 			if(couldBePath(possibilities)){
-				//Try to replace agent etc.
 				possibilities = followPath(actionInstance, param.options)
 			}
 
@@ -159,7 +180,6 @@ function treeGuiOfActionInstance(actionInstance, actionLocalAddress){
 						possibility = possibility.replace("@agent", agentAddress);
 					}
 				}
-
 				let option = document.createElement("option");
 				option.value = possibilities[j];
 				option.textContent = possibility;
@@ -172,32 +192,13 @@ function treeGuiOfActionInstance(actionInstance, actionLocalAddress){
 			})
 
 			li.appendChild(select);
-		} else {
-			//TODO Pass in user-defined value
 		}
+
 		ul.appendChild(li);
 	}
-	
+
 	return ul;
 }
-
-/*
-function treeGuiOfAction(node, nodeAddress){
-	//Check if action is local or needs to be fetched
-	if(couldBePath(node)){
-		node = followPath(node, resolvePath(nodeAddress, node));
-	}
-	let nodeName = getNodeText(node, node);
-
-	let button = document.createElement("button");
-	button.id = nodeAddress;
-	button.textContent = nodeName;
-	button.addEventListener("click", function(){
-		invokeAction(nodeAddress, []);
-	})
-	return button;
-}
- */
 
 //Build the menu buttons and then recursively print out the properties
 function updateTreeGui(){

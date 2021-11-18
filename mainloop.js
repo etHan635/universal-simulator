@@ -5,7 +5,7 @@
 
 	// The amount of time (in milliseconds) to simulate each time update()
 	// runs. See `MainLoop.setSimulationTimestep()` for details.
-	var simulationTimestep = 1000, /// 60,
+	var simulationTimestep = 1000 / 10, /// 60,
 
 		// The cumulative amount of in-app time that hasn't been simulated yet.
 		// See the comments inside animate() for details.

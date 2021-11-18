@@ -60,13 +60,13 @@ function followPath(node, path, value = undefined){
 		} else if(step == "*"){
 			if(i == workingPath.length - 1){
 				//Get addresses of children
-				let children = [];
+				let childAddresses = [];
 				for(key in node){
 					if(key[0] != "_"){
-						children.push(path.slice(0, -1) + key);
+						childAddresses.push(path.slice(0, -1) + key);
 					}
 				}
-				return children;
+				return childAddresses;
 			} else {
 				return undefined;
 			}
