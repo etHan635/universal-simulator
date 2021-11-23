@@ -37,7 +37,7 @@ data["Organisation"] = {
 
 	carryOut:{
 		hotWok:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Hot Wok",
 			},
 			

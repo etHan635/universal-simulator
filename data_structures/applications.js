@@ -3,7 +3,7 @@ data["Applications"] =
 	webBrowser:
 	{
 		chrome:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Chrome",
 			},
 			properties:{
@@ -14,7 +14,7 @@ data["Applications"] =
 	email:
 	{
 		chromeGmail:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Gmail",
 			},
 			properties:{
@@ -24,7 +24,7 @@ data["Applications"] =
 	internetSearch:
 	{
 		chromeGoogleSearch:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Google Search",
 			},
 			properties:{
@@ -35,7 +35,7 @@ data["Applications"] =
 	{
 		gmail:
 		{
-			visualisation:{
+			_visualisation:{
 				shortname:"Gmail",
 			},
 			properties:{
@@ -43,7 +43,7 @@ data["Applications"] =
 		},
 		slack:
 		{
-			visualisation:{
+			_visualisation:{
 				shortname:"Slack",
 			},
 			properties:{
@@ -51,7 +51,7 @@ data["Applications"] =
 		},
 		androidMessages:
 		{
-			visualisation:{
+			_visualisation:{
 				shortname:"Messages",
 			},
 			properties:{
@@ -59,7 +59,7 @@ data["Applications"] =
 		},
 		discord:
 		{
-			visualisation:{
+			_visualisation:{
 				shortname:"Discord",
 			},
 			properties:{
@@ -69,7 +69,7 @@ data["Applications"] =
 	banking:{
 		halifax:
 		{
-			visualisation:{
+			_visualisation:{
 				shortname:"Halifax Online",
 			},
 			properties:{
@@ -84,7 +84,7 @@ data["Applications"] =
 	{
 		kanban:
 		{
-			visualisation:{
+			_visualisation:{
 				shortname:"Kanban",
 			},
 
@@ -100,7 +100,7 @@ data["Applications"] =
 		},
 		jira:
 		{
-			visualisation:{
+			_visualisation:{
 				shortname:"Jira",
 			},
 
@@ -122,7 +122,7 @@ data["Applications"] =
 	{
 		github:
 		{
-			visualisation:{
+			_visualisation:{
 				shortname:"Github",
 			},
 			properties:{
@@ -133,7 +133,7 @@ data["Applications"] =
 	{
 		BBC1:
 		{
-			visualisation:{
+			_visualisation:{
 				shortname:"BBC1",
 			},
 			properties:{
@@ -144,7 +144,7 @@ data["Applications"] =
 	{
 		amazon:
 		{
-			visualisation:{
+			_visualisation:{
 				shortname:"amazon",
 			},
 

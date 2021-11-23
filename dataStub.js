@@ -10,12 +10,14 @@ data["test"] = {
 	_visualisation:{shortname:"Address Test Data"},
 	foo:{
 		_visualisation:{shortname:"Foo",},
-		_visibleActions:[
-			"@/actionTest/addTen",
-			"@/actionTest/addToX",
-			"@/actionTest/set",
-			"@/actionTest/remove",
-		],
+		_visible: {
+			actions:[
+				"@/actionTest/addTen",
+				"@/actionTest/addToX",
+				"@/actionTest/set",
+				"@/actionTest/remove",
+			],
+		},	
 		name:"foo",
 		x:10,
 		y:[{fizz:907, buzz:908, woof:true},'b','c'],
@@ -74,11 +76,11 @@ data["actionTest"] = {
 		transforms:{pre:[["add", "@args/numberAddress", "@args/delta"]]}
 	},
 	addTen:{
-		_visualisation:{shortname:"Add 10 to Node",},
+		_visualisation:{shortname:"Add 'Ten' to Node",},
 		duration:0.0,
 		params:{
 			numberAddress:{	type:"pick", options:"@agent/*", },
-			delta:{	type:"readonly", value:10, },
+			delta:{	type:"readonly", value:"Ten", },
 		},
 		transforms:{pre:[["add", "@args/numberAddress", "@args/delta"]]}
 	},

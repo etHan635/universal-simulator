@@ -1,13 +1,13 @@
 data["Objects"] = {
-	visualisation:{
+	_visualisation:{
 		layout:"Grid"
 	},
 	bed:{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid"
 		},
 		homeBed:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Double Bed",
 				manufacturer:"Ikea",
 				brand:"HEMNES",
@@ -34,11 +34,11 @@ data["Objects"] = {
 		},
 	},
 	sofa:{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid"
 		},
 		homeSofa:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Sofa",
 				manufacturer:"Ikea",
 				brand:"LANDSKRONA",
@@ -65,11 +65,11 @@ data["Objects"] = {
 		},
 	},
 	deskChair:{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid"
 		},
 		homeChair:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Desk Chair",
 				manufacturer:"Ikea",
 				brand:"FLINTAN",
@@ -95,11 +95,11 @@ data["Objects"] = {
 		},
 	},
 	table:{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid"
 		},
 		homeDesk:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Desk",
 				manufacturer:"Ikea",
 				brand:"BEKANT",
@@ -126,11 +126,11 @@ data["Objects"] = {
 		},
 	},
 	debitCard:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Debit Cards"
 		},
 		"0123 0123 0123 0123":{
-			visualisation:{
+			_visualisation:{
 				shortname:"Visa Debit Card",
 				manufacturer:"Halifax",
 				brand:"Visa Debit",
@@ -147,11 +147,11 @@ data["Objects"] = {
 		},
 	},
 	cheque:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Cheques"
 		},
 		unemploymentCheque:{
-			visualisation:{
+			_visualisation:{
 				shortname:"JobSeekers Allowance Cheque",
 				manufacturer:"Halifax",
 				brand:"Cheque",

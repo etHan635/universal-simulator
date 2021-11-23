@@ -1,14 +1,14 @@
 data["DataStorages"] = 
 {
-	visualisation:{
+	_visualisation:{
 		shortname:"Data Storage",
 	},
 	pcHardDrive:{
-		visualisation:{
+		_visualisation:{
 			shortname:"PC Harddrives",
 		},
 		harddrive1:{
-			visualisation:{
+			_visualisation:{
 				shortname:"2TB Hard Drive",
 				manufacturer:"Seagate",
 				brand:"BarraCuda Compute",
@@ -18,14 +18,14 @@ data["DataStorages"] =
 				connectedToComputer:"Computers/pc/homePC",
 				accounts:{
 					public:{
-						visualisation:{
+						_visualisation:{
 							shortname:"public Account",
 						},
 						applications:["Applications/webBrowser/chrome"],
 						files:{},
 					},
 					jackBurton:{
-						visualisation:{
+						_visualisation:{
 							shortname:"JackBurton Account",
 						},
 						username:"JackBurton",
@@ -46,7 +46,7 @@ data["DataStorages"] =
 	},
 	memoryStick:{
 		jackBurtonsMemoryStick1:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Memory Stick",
 				manufacturer:"SanDisk",
 				brand:"Ultra",
@@ -55,7 +55,7 @@ data["DataStorages"] =
 				connectedToComputer:undefined,
 				accounts:{
 					public:{		
-						visualisation:{
+						_visualisation:{
 							shortname:"public Account",
 						},
 						applications:{},
@@ -67,7 +67,7 @@ data["DataStorages"] =
 	},
 	smartPhoneStorage:{
 		peteCharlesPhone:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Samsung Internal",
 				manufacturer:"Samsung",
 				brand:"Samsung A12",
@@ -76,7 +76,7 @@ data["DataStorages"] =
 				connectedToComputer:"Computers/smartPhone/peteCharlesPhone",
 				accounts:{
 					peteCharles:{	
-						visualisation:{
+						_visualisation:{
 							shortname:"peteCharles@gmail.com Account",
 						},
 						phoneNumber:"02890 555 556",
@@ -97,7 +97,7 @@ data["DataStorages"] =
 			},
 		},
 		frankPetersPhone:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Samsung Internal",
 				manufacturer:"Samsung",
 				brand:"Samsung A12",
@@ -106,7 +106,7 @@ data["DataStorages"] =
 				connectedToComputer:"Computers/smartPhone/frankPetersPhone",
 				accounts:{
 					frankPeters:{	
-						visualisation:{
+						_visualisation:{
 							shortname:"frankPeters@gmail.com Account",
 						},
 						phoneNumber:"02890 555 556",
@@ -127,7 +127,7 @@ data["DataStorages"] =
 			},
 		},
 		jackBurtonsPhone:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Pixel 4a Internal",
 				manufacturer:"Google",
 				brand:"Pixel 4a",
@@ -136,7 +136,7 @@ data["DataStorages"] =
 				connectedToComputer:"Computers/smartPhone/jackBurtonsPhone",
 				accounts:{
 					jackBurton:{	
-						visualisation:{
+						_visualisation:{
 							shortname:"jackBurton@gmail.com Account",
 						},
 						phoneNumber:"02890 555 555",
@@ -174,7 +174,7 @@ data["DataStorages"] =
 	},
 	smartTVStorage:{
 		jackBurtonsTVStorage:{
-			visualisation:{
+			_visualisation:{
 				shortname:"LG TV Internal",
 				manufacturer:"LG",
 				brand:"43UN74006LB",
@@ -183,7 +183,7 @@ data["DataStorages"] =
 				connectedToComputer:"Computers/smartTV/jackBurtonsTV",
 				accounts:{
 					public:{		
-						visualisation:{
+						_visualisation:{
 							shortname:"public Account",
 						},
 						applications:["Applications/digitalTV/BBC1"],
@@ -197,7 +197,7 @@ data["DataStorages"] =
 		
 	bankAccounts:{
 		halifax:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Halifax Bank Accounts",
 				manufacturer:"Halifax",
 				brand:"Amazon Server Farm",
@@ -222,7 +222,7 @@ data["DataStorages"] =
 						},
 					},
 					jackBurton:{
-						visualisation:{
+						_visualisation:{
 							shortname:"JackBurton Banking",
 						},
 						currentAccounts:{
@@ -324,7 +324,7 @@ data["DataStorages"] =
 		
 	onlineProducts:{
 		amazonProducts:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Amazon Product Databases",
 				manufacturer:"Amazon",
 				brand:"Amazon Server Farm",
@@ -337,7 +337,7 @@ data["DataStorages"] =
 							food:{
 								sweets:{
 									chewits:{
-										visualisation:{
+										_visualisation:{
 											shortname:"Stick of Pineapple Chewits",
 										},
 
@@ -376,7 +376,7 @@ data["DataStorages"] =
 		
 	onlineShoppingAccounts:{
 		amazonShoppingBaskets:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Amazon Shopping Baskets",
 				manufacturer:"Amazon",
 				brand:"Amazon Server Farm",
@@ -385,7 +385,7 @@ data["DataStorages"] =
 				connectedToComputer:"Computers/internetServer/amazonServer",
 				accounts:{
 					jackBurton:{
-						visualisation:{
+						_visualisation:{
 							shortname:"JackBurton Shopping",
 						},
 						username:"JackBurton",
@@ -436,7 +436,7 @@ data["DataStorages"] =
 	},
 	emailInbox:{
 		jackBurtonInbox:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Gmail Storage",
 				manufacturer:"Google",
 				brand:"Google Server Farm",
@@ -445,7 +445,7 @@ data["DataStorages"] =
 				connectedToComputer:"Computers/internetServer/gmailServer",
 				accounts:{
 					jackBurton:{
-						visualisation:{
+						_visualisation:{
 							shortname:"JackBurton Account",
 						},
 						username:"JackBurton",
@@ -487,7 +487,7 @@ data["DataStorages"] =
 	ticketing:{
 		royalMail:{
 			delivery:{
-				visualisation:{
+				_visualisation:{
 					shortname:"Royal Mail Delivery",
 					manufacturer:"Amazon",
 					brand:"AWS",
@@ -517,7 +517,7 @@ data["DataStorages"] =
 		},
 		amazon:{
 			shoppingOrders:{
-				visualisation:{
+				_visualisation:{
 					shortname:"Amazon Shopping Order Fulfilment",
 					manufacturer:"Amazon",
 					brand:"AWS",
@@ -545,7 +545,7 @@ data["DataStorages"] =
 				},
 			},
 			jira:{
-				visualisation:{
+				_visualisation:{
 					shortname:"Amazon Shopping Source Control",
 					manufacturer:"Amazon",
 					brand:"AWS",
@@ -628,7 +628,7 @@ data["DataStorages"] =
 	
 	sourceControl:{
 		amazonShopping:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Amazon Shopping Source Control",
 				manufacturer:"Amazon",
 				brand:"AWS",

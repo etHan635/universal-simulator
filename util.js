@@ -11,7 +11,6 @@ function checkActionPrerequisitesMet(actionInstance){
 			while(couldBePath(value)){
 				value = followPath(actionInstance, value);
 			}
-			console.log(value);
 			if(value == undefined){
 				return false;
 			}
@@ -33,7 +32,9 @@ function getNodeText(node, defaultText){
 
 	if(typeof node == "object"){
 		if(node._visualisation != undefined){
-			defaultText = node._visualisation.shortname;
+			if(node._visualisation.shortname != undefined){
+				defaultText = node._visualisation.shortname;
+			}
 		}
 	}
 	return defaultText;

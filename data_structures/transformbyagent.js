@@ -2,7 +2,7 @@
 data["TransformByAgent"] = {
 	//Move to another location
 	walk:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Walk",
 		},
 		
@@ -90,7 +90,7 @@ data["TransformByAgent"] = {
 	},
 
 	drive:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Drive",
 		},
 		
@@ -227,7 +227,7 @@ data["TransformByAgent"] = {
 
 	//All actions are generic
 	computerPowerOff:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Power Off",
 		},
 		
@@ -283,7 +283,7 @@ data["TransformByAgent"] = {
 		},
 	},
 	computerPowerOn:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Power On",
 		},
 		
@@ -329,7 +329,7 @@ data["TransformByAgent"] = {
 		},
 	},
 	computerLogin:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Login",
 		},
 		
@@ -396,7 +396,7 @@ data["TransformByAgent"] = {
 	},
 
 	computerUseWebApp:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Use Web App",
 		},
 		
@@ -442,7 +442,7 @@ data["TransformByAgent"] = {
 	},
 
 	computerSwitchActiveApp:{
-				visualisation:{
+				_visualisation:{
 			shortname:"Switch Active Web App",
 		},
 		
@@ -497,7 +497,7 @@ data["TransformByAgent"] = {
 	},
 	
 	computerCloseActiveWebApp:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Close Active Web App",
 		},
 		
@@ -579,7 +579,7 @@ data["TransformByAgent"] = {
 	},
 	
 	computerOpenWebApp:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Open Web App",
 		},
 		
@@ -698,7 +698,7 @@ data["TransformByAgent"] = {
 	},
 	
 	webAppShopping_addToCart:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Add to cart",
 		},
 		
@@ -757,7 +757,7 @@ data["TransformByAgent"] = {
 			addToCart:{
 				id:"thisWebSession/currentAccount/files/openCart/products",
 				addObject:{
-					visualisation:{
+					_visualisation:{
 						shortname:"*thisProduct/visualisation/shortname",
 					},
 					productid:"thisProduct",
@@ -777,7 +777,7 @@ data["TransformByAgent"] = {
 		},
 	},
 	webAppShopping_removeFromCart:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Remove from cart",
 		},
 		
@@ -810,7 +810,7 @@ data["TransformByAgent"] = {
 		},
 	},
 	webAppShopping_completeOrder:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Complete order",
 		},
 		
@@ -1015,7 +1015,7 @@ data["TransformByAgent"] = {
 	//A subroutine, the caller must know the parameters
 	//That need to be setup before calling this function
 	kanban_addTask:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Add Task",
 		},
 		
@@ -1046,7 +1046,7 @@ data["TransformByAgent"] = {
 	//Add to a kanban task details
 		//For example add a reference to a physical object
 	kanban_addObjectToTaskDetail:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Add Object reference to Task",
 		},
 		
@@ -1145,7 +1145,7 @@ data["TransformByAgent"] = {
 	//A subroutine, the caller must know the parameters
 	//That need to be setup before calling this function
 	kanban_assignOwnershipOfTask:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Assign Ownership",
 		},
 		
@@ -1203,7 +1203,7 @@ data["TransformByAgent"] = {
 		},
 	},
 	kanban_completeTask:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Complete Task",
 		},
 		
@@ -1246,7 +1246,7 @@ data["TransformByAgent"] = {
 	},
 
 	payment_transferFunds:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Transfer Funds",
 		},
 		
@@ -1321,7 +1321,7 @@ data["TransformByAgent"] = {
 	//Take a quantity that is expressed as a resource
 	//Convert into a unique instance
 	getObjectInstance:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Get Object",
 		},
 		
@@ -1436,7 +1436,7 @@ data["TransformByAgent"] = {
 	},
 	
 	moveObject:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Move Object",
 		},
 		
@@ -1553,7 +1553,7 @@ data["TransformByAgent"] = {
 	
 	//Take an object and turn into a resource to save space
 	storeObjectInstance:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Store Object",
 		},
 		

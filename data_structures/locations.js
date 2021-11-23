@@ -1,24 +1,24 @@
 data["Locations"] = {
-	visualisation:{
+	_visualisation:{
 		layout:"Grid",
 		shortname:"Locations",
 	},
 	traveling : {
 		//properties for visualisation
-		visualisation:{
+		_visualisation:{
 			shortname:"Traveling",
 		},
 	},
 	garage:
 	{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid",
 			shortname:"Garages",
 		},
 		//When bought an instance is created
 		homeGarage:{
 			//properties for visualisation
-			visualisation:{
+			_visualisation:{
 				shortname:"Garage",
 				addressNumber:"1",
 				street:"Main Street",
@@ -59,14 +59,14 @@ data["Locations"] = {
 	},
 	livingroom:
 	{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid",
 			shortname:"Livingrooms",
 		},
 		//When bought an instance is created
 		homeLivingroom:{
 			//properties for visualisation
-			visualisation:{
+			_visualisation:{
 				shortname:"Livingroom",
 				addressNumber:"1",
 				street:"Main Street",
@@ -86,13 +86,13 @@ data["Locations"] = {
 	},
 	bedroom:
 	{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid",
 			shortname:"Bedrooms",
 		},
 		homeBedroom:{
 			//properties for visualisation
-			visualisation:{
+			_visualisation:{
 				shortname:"Bedroom",
 				addressNumber:"1",
 				street:"Main Street",
@@ -115,14 +115,14 @@ data["Locations"] = {
 	},
 	shop:
 	{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid",
 			shortname:"Shops",
 		},
 		//When bought an instance is created
 		buildingSupplies:{
 			//properties for visualisation
-			visualisation:{
+			_visualisation:{
 				shortname:"Building Supplies",
 				addressNumber:"1",
 				street:"High Street",
@@ -171,13 +171,13 @@ data["Locations"] = {
 	},
 	marketStall:
 	{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid"
 		},
 		//When bought an instance is created
 		marketStall:{
 			//properties for visualisation
-			visualisation:{
+			_visualisation:{
 				shortname:"Market Stall",
 				addressNumber:"1",
 				street:"Central Square",
@@ -218,12 +218,12 @@ data["Locations"] = {
 	},
 	officeReception:
 	{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid"
 		},
 		officeReception:{
 			//properties for visualisation
-			visualisation:{
+			_visualisation:{
 				shortname:"Reception",
 				addressNumber:"10",
 				street:"High Street",
@@ -257,12 +257,12 @@ data["Locations"] = {
 		},
 	},
 	officeOpenPlan:{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid"
 		},
 		officeOpenPlan:{
 			//properties for visualisation
-			visualisation:{
+			_visualisation:{
 				shortname:"Open Plan Office",
 				addressNumber:"10",
 				street:"High Street",
@@ -291,14 +291,14 @@ data["Locations"] = {
 	},
 	amazonWarehouse:
 	{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid",
 			shortname:"Amazon Warehouses",
 		},
 		//When bought an instance is created
 		amazonWarehouse0:{
 			//properties for visualisation
-			visualisation:{
+			_visualisation:{
 				shortname:"Amazon Warehouse 0",
 				addressNumber:"1",
 				street:"Back Street",

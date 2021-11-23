@@ -1,9 +1,9 @@
 data["Resources"] = {
-	visualisation:{
+	_visualisation:{
 		layout:"Grid"
 	},
 	rawMaterial:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Raw Material",
 		},
 		properties:
@@ -13,7 +13,7 @@ data["Resources"] = {
 		},
 	},
 	product:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Product",
 		},
 		properties:

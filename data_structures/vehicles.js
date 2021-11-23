@@ -1,15 +1,15 @@
 data["Vehicles"] = {
-	visualisation:{
+	_visualisation:{
 		layout:"Grid"
 	},
 	car:
 	{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid"
 		},
 		car:{
 			//properties for visualisation
-			visualisation:{
+			_visualisation:{
 				shortname:"Grey Honda Jazz",
 				colour:"Grey",
 				manufacturer:"Honda",
@@ -62,12 +62,12 @@ data["Vehicles"] = {
 	},
 	van:
 	{
-		visualisation:{
+		_visualisation:{
 			layout:"Grid"
 		},
 		van:{
 			//properties for visualisation
-			visualisation:{
+			_visualisation:{
 				shortname:"VW Van",
 				colour:"Grey",
 				manufacturer:"Honda",

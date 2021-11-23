@@ -13,9 +13,11 @@ function treeGuiOf(node, nodeAddress){
 		}
 		for(key in node){
 			if(key[0] == '_'){
-				if(key == "_visibleActions"){
-					let visibleActions = node._visibleActions;
-					ul.appendChild(treeGuiOfActions(visibleActions, nodeAddress + "/_visibleActions"));
+				if(key == "_visible"){
+					if(node._visible.actions != undefined){
+						let visibleActions = node._visible.actions;
+						ul.appendChild(treeGuiOfActions(visibleActions, nodeAddress + "/_visible/actions"));
+					}
 				}
 				continue; 
 			}
@@ -84,7 +86,7 @@ function treeGuiOfActions(visibleActions, visibleActionsAddress){
 		let actionAddress = visibleActionsAddress + "/" + actionSelect.selectedIndex;
 
 		let action = followPath(data, actionAddress);
-		let agent = followPath(visibleActions, "@..");
+		let agent = followPath(visibleActions, "@../..");
 		let args = {};
 
 		//Initialise Action Instance
@@ -139,8 +141,7 @@ function treeGuiOfActions(visibleActions, visibleActionsAddress){
 function treeGuiOfActionInstance(actionInstance, actionLocalAddress){
 	let ul = document.createElement("ul");
 
-	let agentAddress = resolvePath(actionLocalAddress, "@../..")
-
+	let agentAddress = resolvePath(actionLocalAddress, "@../../..")
 	let params = actionInstance.action.params;
 	if(params == undefined){
 		return ul;
@@ -161,8 +162,6 @@ function treeGuiOfActionInstance(actionInstance, actionLocalAddress){
 		if(type == "readonly"){	
 			//Merely display a predefined value.
 			let value = param.value;
-			//actionInstance.args[key] = value;
-
 			if(couldBePath(value)){
 				if(value.includes("@agent")){
 					value = value.replace("@agent", agentAddress);

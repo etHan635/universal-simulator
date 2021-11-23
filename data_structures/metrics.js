@@ -1,9 +1,9 @@
 data["Metrics"] = {
-	visualisation:{
+	_visualisation:{
 		layout:"Grid"
 	},
 	totalProduced:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Total Products Created",
 		},
 		properties:

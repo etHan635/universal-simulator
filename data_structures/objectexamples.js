@@ -1,6 +1,6 @@
 data["ObjectExamples"] = {
 	pineappleChewits:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Stick of Pineapple Chewits",
 			manufacturer:"Cloetta",
 			brand:"Chewits",
@@ -18,7 +18,7 @@ data["ObjectExamples"] = {
 		},
 	},
 	pineappleChewit:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Pineapple Chewit",
 			manufacturer:"Cloetta",
 			brand:"Chewits",
@@ -36,7 +36,7 @@ data["ObjectExamples"] = {
 		},
 	},
 	chewitWrapper:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Chewit Wrapper",
 			manufacturer:"Cloetta",
 			brand:"Chewits",
@@ -50,7 +50,7 @@ data["ObjectExamples"] = {
 		},
 	},
 	amazonCardboardBox:{
-		visualisation:{
+		_visualisation:{
 			shortname:"Amazon Cardboard Box",
 			manufacturer:"Amazon",
 			brand:"Carboard box",
@@ -69,7 +69,7 @@ data["ObjectExamples"] = {
 	},
 	beds:{
 		doubleBed:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Double Bed",
 				manufacturer:"Ikea",
 				brand:"HEMNES",
@@ -96,7 +96,7 @@ data["ObjectExamples"] = {
 	},
 	chairs:{
 		deskChair:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Desk Chair",
 				manufacturer:"Ikea",
 				brand:"FLINTAN",
@@ -120,7 +120,7 @@ data["ObjectExamples"] = {
 			},
 		},
 		sofa:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Sofa",
 				manufacturer:"Ikea",
 				brand:"LANDSKRONA",
@@ -147,7 +147,7 @@ data["ObjectExamples"] = {
 	},
 	tables:{
 		desk:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Desk",
 				manufacturer:"Ikea",
 				brand:"BEKANT",
@@ -174,7 +174,7 @@ data["ObjectExamples"] = {
 	},
 	cards:{
 		debitCard:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Visa Debit Card",
 				manufacturer:"Halifax",
 				brand:"Visa Debit",
@@ -191,7 +191,7 @@ data["ObjectExamples"] = {
 	},
 	cheques:{
 		cheque:{
-			visualisation:{
+			_visualisation:{
 				shortname:"JobSeekers Allowance Cheque",
 				manufacturer:"Halifax",
 				brand:"Cheque",
@@ -210,7 +210,7 @@ data["ObjectExamples"] = {
 	},
 	pcs:{
 		pc:{
-			visualisation:{
+			_visualisation:{
 				shortname:"PC",
 				manufacturer:"Dell",
 				brand:"Inspiron",
@@ -240,7 +240,7 @@ data["ObjectExamples"] = {
 	},
 	smartPhones:{
 		smartPhone:{
-			visualisation:{
+			_visualisation:{
 				shortname:"Samsung Galaxy A12",
 				manufacturer:"Samsung",
 				brand:"Galaxy A12",
@@ -271,7 +271,7 @@ data["ObjectExamples"] = {
 	cars:{
 		car:{
 			//properties for visualisation
-			visualisation:{
+			_visualisation:{
 				shortname:"Grey Honda Jazz",
 				colour:"Grey",
 				manufacturer:"Honda",
@@ -322,7 +322,7 @@ data["ObjectExamples"] = {
 		},
 		van:{
 			//properties for visualisation
-			visualisation:{
+			_visualisation:{
 				shortname:"VW Van",
 				colour:"Grey",
 				manufacturer:"Honda",

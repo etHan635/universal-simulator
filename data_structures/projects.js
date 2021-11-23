@@ -111,7 +111,7 @@ data["Projects"] = {
 				
 			},
 			amazonShopping:{
-				visualisation:{
+				_visualisation:{
 					shortname:"Amazon shopping project",
 				},		
 				properties:{
