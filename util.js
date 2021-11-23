@@ -1,4 +1,28 @@
 /*
+ * Checks whether all conditions are met for a given actionInstance to be invoked
+ * */
+function checkActionPrerequisitesMet(actionInstance){
+	let conditions = actionInstance.action.prerequisites;
+	if(conditions == undefined){ return true; }
+	for(let i = 0; i < conditions.length; i++){
+		let condition = conditions[i];
+		if(condition[0] == "exists"){
+			let value = condition[1];
+			while(couldBePath(value)){
+				value = followPath(actionInstance, value);
+			}
+			console.log(value);
+			if(value == undefined){
+				return false;
+			}
+		} else {
+			//More condition types will go here...
+		}
+	}
+	return true;
+}
+
+/*
  * Returns either the value of a node, or it's _visualisation.shortname if one can be found.
  * */
 function getNodeText(node, defaultText){

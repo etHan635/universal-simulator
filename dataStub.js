@@ -11,8 +11,8 @@ data["test"] = {
 	foo:{
 		_visualisation:{shortname:"Foo",},
 		_visibleActions:[
-			"@/actionTest/add",
-			"@/actionTest/add10ToX",
+			"@/actionTest/addTen",
+			"@/actionTest/addToX",
 			"@/actionTest/set",
 			"@/actionTest/remove",
 		],
@@ -47,7 +47,7 @@ data["actionTest"] = {
 	sampleAction:{
 		_visualisation:{shortname:"Example",},
 		duration:5.0,		//The duration of the action
-		preconditions:[],	//What must be true for action to be executed
+		prerequisites:[],	//What must be true for action to be executed
 		parameters:[],		//The parameters needed, used in transforms
 		transforms:{
 			pre:[
@@ -61,10 +61,10 @@ data["actionTest"] = {
 			]
 		},
 	},
-	add10ToX:{
+	addToX:{
 		_visualisation:{shortname:"Change agent.x by Delta"},
 		duration:0.0,
-		preconditions:[
+		prerequisites:[
 			["exists", "@args/numberAddress"],
 		],
 		params:{
@@ -73,31 +73,21 @@ data["actionTest"] = {
 		},
 		transforms:{pre:[["add", "@args/numberAddress", "@args/delta"]]}
 	},
-	add:{
+	addTen:{
 		_visualisation:{shortname:"Add 10 to Node",},
 		duration:0.0,
 		params:{
-			numberAddress:{
-				type:"pick",
-				options:"@agent/*",	//'working directory' is actionInstance
-			},
-			delta:{
-				type:"readonly",
-				value:10,
-			},
+			numberAddress:{	type:"pick", options:"@agent/*", },
+			delta:{	type:"readonly", value:10, },
 		},
 		transforms:{pre:[["add", "@args/numberAddress", "@args/delta"]]}
 	},
 	set:{
 		_visualisation:{shortname:"Set Node",},
 		duration:0.0,
-		params:{
-			nodeAddress:{
-				type:"enter",
-			},
-			value:{
-				type:"enter",
-			}
+		params:{ 
+			nodeAddress:{ type:"enter",},
+			value:{	type:"enter",},
 		},
 		transforms:{pre:[["set", "@args/nodeAddress", "@args/value"]]}
 	},
@@ -105,10 +95,7 @@ data["actionTest"] = {
 		_visualisation:{shortname:"Remove Node"},
 		duration:0.0,
 		params:{
-			nodeAddress:{
-				type:"pick",
-				options:"@agent/*"
-			},
+			nodeAddress:{ type:"pick", options:"@agent/*" },
 		},
 		transforms:{pre:[["remove", "@args/nodeAddress"]]}
 	}

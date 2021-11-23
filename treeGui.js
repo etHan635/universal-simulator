@@ -80,21 +80,39 @@ function treeGuiOfActions(visibleActions, visibleActionsAddress){
 	actionSelect.selectedIndex = -1;
 	actionSelect.addEventListener("change", function(){
 		actionDiv.textContent = "";
+		buttonHolder.textContent = "";
 		let actionAddress = visibleActionsAddress + "/" + actionSelect.selectedIndex;
 
 		let action = followPath(data, actionAddress);
 		let agent = followPath(visibleActions, "@..");
 		let args = {};
 
+		//Initialise Action Instance
 		let actionInstance = {
 			action: action,
 			agent: agent,
 			args: args,
 		};
 
+		//Populate all readonly args
+		let keys = Object.keys(actionInstance.action.params);
+		for(i = 0; i < keys.length; i++){
+			let param = actionInstance.action.params[keys[i]];
+			if(param.type == "readonly"){
+				let key = Object.keys(actionInstance.action.params)[i];
+				actionInstance.args[key] = param.value;
+			}
+		}
+			
+		if(!checkActionPrerequisitesMet(actionInstance)){
+			let errorMessage = document.createElement("span");
+			errorMessage.textContent = "Prerequisites not met for this action.";
+			actionDiv.appendChild(errorMessage);
+			return;
+		}
+
 		actionDiv.appendChild(treeGuiOfActionInstance(actionInstance, actionAddress));
 
-		buttonHolder.textContent = "";
 
 		let button = document.createElement("button");
 		button.textContent = "Execute";
@@ -143,7 +161,7 @@ function treeGuiOfActionInstance(actionInstance, actionLocalAddress){
 		if(type == "readonly"){	
 			//Merely display a predefined value.
 			let value = param.value;
-			actionInstance.args[key] = value;
+			//actionInstance.args[key] = value;
 
 			if(couldBePath(value)){
 				if(value.includes("@agent")){
