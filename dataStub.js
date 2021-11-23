@@ -5,7 +5,7 @@ var data={
 	},
 
 };
-
+/*
 data["test"] = {
 	_visualisation:{shortname:"Address Test Data"},
 	foo:{
@@ -99,4 +99,4 @@ data["actionTest"] = {
 		},
 		transforms:{pre:[["remove", "@args/nodeAddress"]]}
 	}
-};
+}; */
