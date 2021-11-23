@@ -56,6 +56,7 @@ function performAction(actionInstance, stage){
  * Adds an action instance to currentActions.
  */
 function invokeAction(actionInstance){
+	if(!checkActionPrerequisitesMet(actionInstance)){ return; }
 	actionInstance.timeElapsed = 0.0;
 	currentActions.push(actionInstance);
 	guiUpdateTrigger = true;
