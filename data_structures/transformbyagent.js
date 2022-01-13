@@ -5,16 +5,8 @@ data["TransformByAgent"] = {
 		_visualisation:{
 			shortname:"Walk",
 		},
-		
 		duration:1.0,
-
-		//List of conditions on whether this action can be performed by this object
-		canAct:
-		[
-		],
-
-		parameters:
-		[
+		parameters:[
 		{
 			name:"thisLocation",
 			//Path to the lists of possible objects
@@ -50,7 +42,6 @@ data["TransformByAgent"] = {
 			],
 		},
 		],
-	
 		input:{
 			//Make the properties that are consumed based on the properties
 			//of the agent

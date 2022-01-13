@@ -34,7 +34,7 @@ function getNodeText(node, defaultText){
 		if(node._visualisation != undefined){
 			if(node._visualisation.shortname != undefined){
 				defaultText = node._visualisation.shortname;
-			}
+			} 
 		}
 	}
 	return defaultText;
