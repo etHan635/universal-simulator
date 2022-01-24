@@ -12,10 +12,11 @@ data["test"] = {
 		_visualisation:{shortname:"Foo",},
 		_visible: {
 			actions:[
-				"@/actionTest/addTen",
-				"@/actionTest/addToX",
-				"@/actionTest/set",
-				"@/actionTest/remove",
+				"@/actionTest/appendTest",
+				"@/actionTest/addTest",
+				"@/actionTest/setTest",
+				"@/actionTest/removeTest",
+				"@/actionTest/newTest",
 			],
 		},	
 		name:"foo",
@@ -44,61 +45,51 @@ data["test"] = {
 		},
 	},
 };
+
 data["actionTest"] = {
 	_visualisation:{shortname:"Action Test Data"},
-	sampleAction:{
-		_visualisation:{shortname:"Example",},
-		duration:5.0,		//The duration of the action
-		prerequisites:[],	//What must be true for action to be executed
-		parameters:[],		//The parameters needed, used in transforms
-		transforms:{
-			pre:[
-				{ message:"Beginning", },
-			],
-			post:[
-				{ message:"Ending", },
-			],
-			peri:[
-				{ message:"Ongoing", },
-			]
-		},
-	},
-	addToX:{
-		_visualisation:{shortname:"Change agent.x by Delta"},
+	appendTest:{
+		_visualisation:{shortname:"Append 'Test' to Selection",},
 		duration:0.0,
-		prerequisites:[
-			["exists", "@args/numberAddress"],
-		],
 		params:{
-			numberAddress:{	type:"readonly", value:"@agent/x", },
+			field:{	type:"pick", options:"@agent/*", },
+			delta:{	type:"readonly", value:"Test", },
+		},
+		transforms:{pre:["nAppend(nContents(\"@args/field\", actionInstance), nContents(\"@args/delta\", actionInstance), actionInstance)"]}
+	},
+	addTest:{
+		_visualisation:{shortname:"Add to Selection",},
+		duration:0.0,
+		params:{
+			field:{ type:"pick", options:"@agent/*", },
 			delta:{ type:"enter", inputType:"number", },
 		},
-		transforms:{pre:[["add", "@args/numberAddress", "@args/delta"]]}
+		transforms:{pre:["nAppend(nContents(\"@args/field\", actionInstance), nContents(\"@args/delta\", actionInstance), actionInstance)"]}
 	},
-	addTen:{
-		_visualisation:{shortname:"Add 'Ten' to Node",},
-		duration:0.0,
-		params:{
-			numberAddress:{	type:"pick", options:"@agent/*", },
-			delta:{	type:"readonly", value:"Ten", },
-		},
-		transforms:{pre:[["add", "@args/numberAddress", "@args/delta"]]}
-	},
-	set:{
+	setTest:{
 		_visualisation:{shortname:"Set Node",},
 		duration:0.0,
 		params:{ 
-			nodeAddress:{ type:"enter",},
+			field:{ type:"pick", options:"@agent/*",},
 			value:{	type:"enter",},
 		},
-		transforms:{pre:[["set", "@args/nodeAddress", "@args/value"]]}
+		transforms:{pre:["nSet(nContents(\"@args/field\", actionInstance), nContents(\"@args/value\", actionInstance), actionInstance)"]}
 	},
-	remove:{
+	removeTest:{
 		_visualisation:{shortname:"Remove Node"},
 		duration:0.0,
 		params:{
-			nodeAddress:{ type:"pick", options:"@agent/*" },
+			field:{ type:"pick", options:"@agent/*" },
 		},
-		transforms:{pre:[["remove", "@args/nodeAddress"]]}
+		transforms:{pre:["nDelete(nContents(\"@args/field\", actionInstance), actionInstance)"]}
+	},
+	newTest:{
+		_visualisation:{shortname:"Add New Node",},
+		duration:0.0,
+		params:{
+			field:{ type:"enter", },
+			value:{ type:"enter", },
+		},
+		transforms:{pre:["nNew(nContents(\"@args/field\", actionInstance), nContents(\"@args/value\", actionInstance), actionInstance)"]}
 	}
-};
+}
