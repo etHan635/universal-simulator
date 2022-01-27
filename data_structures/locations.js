@@ -49,9 +49,7 @@ data["Locations"] = {
 						 "Objects/deskChair/homeChair",
 						 "Objects/table/homeDesk"],
 			},
-			agents:{
-				default:["Agents/player/me"],
-			},
+			agents:["@/Agents/player/me"],
 			vehicles:{
 				default:["Vehicles/car/car"],
 			},
@@ -79,9 +77,7 @@ data["Locations"] = {
 					quantity:80
 				},
 			},
-			agents:{
-				default:[],
-			},
+			agents:[],
 		},
 	},
 	bedroom:

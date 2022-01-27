@@ -17,7 +17,10 @@ data["Agents"] = {
 			},
 			_visible:{
 				//what actions are now visible for this character
-				actions:{
+				actions:[
+					"@/actions/walk",
+				],
+				/* actions:{
 					walk:"TransformByAgent/walk",
 					drive:"TransformByAgent/drive",
 
@@ -32,19 +35,20 @@ data["Agents"] = {
 					moveObject:"TransformByAgent/moveObject",
 					getObjectInstance:"TransformByAgent/getObjectInstance",
 					storeObjectInstance:"TransformByAgent/storeObjectInstance",
-				},
+				}, */
 				internetAccounts:{
 					bank:"DataStorages/bankAccounts/halifax/properties/accounts/jackBurton",
 					shopping:"DataStorages/onlineShoppingAccounts/amazonShoppingBaskets/properties/accounts/jackBurton",
 				},
 				//Places that this agent knows about
-				locations:{
+				locations:["@/Locations/livingroom/homeLivingroom"],
+				/* locations:{
 					home:"Locations/garage/homeGarage",
 					livingRoom:"Locations/livingroom/homeLivingroom",
 					bedRoom:"Locations/bedroom/homeBedroom",
 					buildingSupplies:"Locations/shop/buildingSupplies",
 					marketStall:"Locations/marketStall/marketStall",
-				},
+				}, */
 				vehicles:{
 					car:"Vehicles/car/car"
 				},
@@ -60,7 +64,7 @@ data["Agents"] = {
 			},
 			properties:{
 				role:[],
-				location:"Locations/garage/homeGarage/agents/default",
+				location:"@/Locations/garage/homeGarage/agents",
 			},
 			mind:{
 				loginDetails:[

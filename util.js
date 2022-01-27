@@ -276,7 +276,5 @@ function splitAddress(address){
 	let segments = address.substring(1).split('/');
 	let kChild = segments.pop();
 	let aParent = "@" + segments.join('/');
-	console.log(aParent);
-	console.log(kChild);
 	return { "aParent":aParent, "kChild":kChild};
 }

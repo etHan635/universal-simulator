@@ -23,6 +23,8 @@ data["actions"] = {
 			post:[
 				"nSet(\"@agent/properties/location\", actionInstance.args[\"thatLocation'\"].resources._parent + \"/agents\", actionInstance)",
 				//TODO: add agent to location.agents array
+				"console.log(nContents(\"@args/thatLocation'\", actionInstance))",
+				"nAddToArray(\"@args/thatLocation'/agents\", actionInstance.agent.properties._parent, actionInstance)",
 				"nAppend(\"@args/thisLocation'/../resources/space/quantity\", 1, actionInstance)"
 			]
 		}
