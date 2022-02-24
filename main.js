@@ -4,7 +4,8 @@ if(window.Worker){
 	
 	simulation.onmessage = function(e){
 		console.log("Message recieved from worker...");
-		document.querySelector("#content").textContent = e.data.state;
+		document.querySelector("#content").appendChild(treeGuiOf(e.data.state, "@"));
 	}
-	
+
+	simulation.postMessage({address:"@", state:data});	
 }
