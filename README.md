@@ -1,9 +1,16 @@
 # universal-simulator
 This is a refactoring of QLab's universal simulator, aiming to streamline the implementation of existing functionality.
 ## Changes
-### Support for External Files
-I attempted to add support for part of a tree to be stored in an external file, and loaded only when the user/system required access.
-Implementation was quite straightforward, but unfortunately most browsers prevent local file access, so I have reverted this feature until the upcoming architecture changes are implemented.
+### Action Processing
+The action processing mechanism has been revamped:
+* Discarded *data-driven* approach in favour of `eval()` based solution.
+* Standardised action instance representation: An instance of an action now has access to:
+	- The original action;
+	- The agent which called the action;
+	- The time elapsed so far;
+	- The arguments provided.
+* Implemented different action stages: pre, peri, post.
+N.B. Most actions have not yet been reimplemented, and the parameter validation functionality is currently unsupported.
 ### Tree GUI
 I significantly altered the Tree-based GUI.
 * Made GUI generator compatible with the new address system.
