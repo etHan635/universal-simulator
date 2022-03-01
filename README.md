@@ -1,6 +1,8 @@
 # universal-simulator
 This is a refactoring of QLab's universal simulator, aiming to streamline the implementation of existing functionality.
 ## Changes
+### React.js
+Currently working on switching to a React.js front-end for performance reasons.
 ### Action Processing
 The action processing mechanism has been revamped:
 * Discarded *data-driven* approach in favour of `eval()` based solution.
