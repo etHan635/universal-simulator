@@ -1,3 +1,6 @@
+if(frame == undefined){
+	
+}
 var frame = 0;
 var absoluteTime = 0.0;
 
@@ -77,6 +80,7 @@ function drawSimulation(){
 
 function endSimulation(fps, panic) 
 {
+	// fpsCounter.textContent = Math.round(fps) + ' FPS';
 	if (panic) {
 		// This pattern introduces non-deterministic behavior, but in this case
 		// it's better than the alternative (the application would look like it
@@ -95,3 +99,19 @@ if(urlObjectID!=undefined){
 }
 
 generateParentRefsInChildren(data, "@");
+
+// TESTING
+/*
+let aI = {
+	agent:data.Agents.player.me,
+	args:{},
+	transforms:{}
+};
+
+console.log(nContents("@agent/properties/location", aI))
+console.log(aI.agent.properties._parent)
+nDeleteFromArray("@agent/properties/location", aI.agent.properties._parent, aI)
+
+console.log(nContents("@agent/properties/location", aI))
+
+guiUpdateTrigger = true; */

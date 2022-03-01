@@ -28,7 +28,7 @@ function treeGuiOf(node, nodeAddress){
 			let link = document.createElement("a");
 			link.classList.add("key");
 			link.id = nodeAddress + "/" + key;
-			// link.href = URL_WITHOUT_PARAMETERS + "?view=" + nodeAddress + "/" + key;
+			link.href = URL_WITHOUT_PARAMETERS + "?view=" + nodeAddress + "/" + key;
 			link.textContent = getNodeText(node[key], key);
 			link.addEventListener("click", function(){ navigateTo(nodeAddress); });
 			li.appendChild(link);
@@ -267,20 +267,3 @@ function updateTreeGui(){
 	contentDiv.appendChild(treeGuiOf(node, path));
 	currentViewNeedsUpdating = false;
 }
-
-function getNodeText(node, defaultText){
-	if(couldBePath(node, true)){
-		//Try to follow path
-		node = followPath(data, node);
-	}
-
-	if(typeof node == "object"){
-		if(node._visualisation != undefined){
-			if(node._visualisation.shortname != undefined){
-				defaultText = node._visualisation.shortname;
-			} 
-		}
-	}
-	return defaultText;
-}
-

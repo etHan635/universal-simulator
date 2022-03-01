@@ -224,7 +224,7 @@ function simulate(){
 	guiUpdateTrigger = true;
 }, */
 			tick: function(delta){
-				// console.log(root.absoluteTime);
+				console.log(root.absoluteTime);
 
 				let delta_s = delta * 0.001;	//Convert delta to seconds
 				root.absoluteTime += delta_s;
@@ -440,16 +440,14 @@ function simulate(){
 		return absPath;
 	}
 
+
 	function refreshGUI() {
-		postMessage({address:"@" , state: data});
+		postMessage({state: data});
 		guiUpdateTrigger = false;
 	}
 
 	onmessage = function(e){
 		console.log("Worker: Message recieved from main.")
-		if(e.data.address == "@"){
-			data = e.data.state;
-		}
 
 		refreshGUI();
 	}
@@ -461,6 +459,6 @@ function simulate(){
 
 }
 
-//apparently duplicate frames fixed themselves? keep an eye out anyway.
+//TODO: fix duplicate frames
 //TODO: do proper messaging with different nodes returned
 //TODO: add onmessage to recieve actions + set + get requests
