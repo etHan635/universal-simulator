@@ -1,9 +1,24 @@
-# universal-simulator
+# Universal Simulator
 This is a refactoring of QLab's universal simulator, aiming to streamline the implementation of existing functionality.
+Specifically, this branch holds an attempt at moving the simulator into a webworker, as these changes have been reverted in the main project.
+
 ## Changes
-### Support for External Files
-I attempted to add support for part of a tree to be stored in an external file, and loaded only when the user/system required access.
-Implementation was quite straightforward, but unfortunately most browsers prevent local file access, so I have reverted this feature until the upcoming architecture changes are implemented.
+### Webworker
+I attempted to move the bulk of the simulation to a **webworker**, Improving performance and separating the simulation from the GUI.
+However, I eventually abandoned this path in favour of using *React.js*, as:
+* The webworker required too much code duplication between the main and worker threads: the UI needed to *understand* the data received from the simulation, so it was not possible to create a clean separation between the two.
+* React solves the performance issues in a manner closer to what we actually needed, allowing for only relevant sections of the graph to be updated each frame.
+* The webworker would be difficult to transfer into a client-server model in the future, whilst React should be far more amenable to such changes.
+### Action Processing
+The action processing mechanism has been revamped:
+* Discarded *data-driven* approach in favour of `eval()` based solution.
+* Standardised action instance representation: An instance of an action now has access to:
+	- The original action;
+	- The agent which called the action;
+	- The time elapsed so far;
+	- The arguments provided.
+* Implemented different action stages: pre, peri, post.
+N.B. Most actions have not yet been reimplemented, and the parameter validation functionality is currently unsupported.
 ### Tree GUI
 I significantly altered the Tree-based GUI.
 * Made GUI generator compatible with the new address system.
