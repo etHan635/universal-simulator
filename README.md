@@ -10,6 +10,7 @@ The action processing mechanism has been revamped:
 	- The time elapsed so far;
 	- The arguments provided.
 * Implemented different action stages: pre, peri, post.
+
 N.B. Most actions have not yet been reimplemented, and the parameter validation functionality is currently unsupported.
 ### Tree GUI
 I significantly altered the Tree-based GUI.
